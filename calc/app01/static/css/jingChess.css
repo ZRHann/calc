@@ -58,3 +58,11 @@ table tr td:last-child {
     font-size: 2em;
 }
 
+#cxksBTN {
+    left: 49.75%;
+}
+.text {
+    height: 120px;
+    width: 100%;
+    line-height: 120px;
+}

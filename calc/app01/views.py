@@ -9,7 +9,21 @@ from django.views.decorators.csrf import csrf_exempt
 from app01.models import UserInfo
 
 
+# 传入request，判断是否有已登录的Cookie
+def getUsername(request):
+    CKusername = request.COOKIES.get('username')
+    CKpassword = request.COOKIES.get('password')
+    obj = UserInfo.objects.filter(username=CKusername).first()
+    if not obj:
+        return -1
+    if obj.password != CKpassword:
+        return -1
+    return CKusername
+
+
 def index(request):
+    currentUsername = getUsername(request)
+    print(currentUsername)
     idx = random.randint(-1, 10)
     bing_api = "https://global.bing.com"
     header = {
@@ -28,31 +42,35 @@ def index(request):
         'imgCopyright': dictcode['images'][0]['copyright'].replace(imgCopyrighten, ''),
         'imgCopyrighten': imgCopyrighten,
         'imgCopyrightlink': dictcode['images'][0]['copyrightlink'],
-        'imgTitle': dictcode['images'][0]['title']
+        'imgTitle': dictcode['images'][0]['title'],
+        'currentUsername': currentUsername,
     }
     return render(request, 'index.html', dict)
 
 
 def empty(request):
+    currentUsername = getUsername(request)
     return redirect('index/')
 
 
 def yyec_equations(request):
-    return render(request, 'yyec_equations.html')
+    currentUsername = getUsername(request)
+    return render(request, 'yyec_equations.html', {'currentUsername': currentUsername})
 
 
 def jingChess(request):
-    return render(request, 'jingChess.html')
+    currentUsername = getUsername(request)
+    return render(request, 'jingChess.html', {'currentUsername': currentUsername})
 
 
 def function(request):
-    return render(request, 'function.html')
+    currentUsername = getUsername(request)
+    return render(request, 'function.html', {'currentUsername': currentUsername})
 
 
 
 @csrf_exempt
 def function_ajax(request):
-    # return HttpResponse(1)
     fxbox = request.POST.get('fxbox')
     xbox = request.POST.get('xbox')
     dict = {}
@@ -73,15 +91,18 @@ def function_ajax(request):
 
 
 def matrix(request):
-    return render(request, 'matrix.html')
+    currentUsername = getUsername(request)
+    return render(request, 'matrix.html', {'currentUsername': currentUsername})
 
 
 def login(request):
-    return render(request, 'login.html')
+    currentUsername = getUsername(request)
+    return render(request, 'login.html', {'currentUsername': currentUsername})
 
 
 def register(request):
-    return render(request, 'register.html')
+    currentUsername = getUsername(request)
+    return render(request, 'register.html', {'currentUsername': currentUsername})
 
 
 @csrf_exempt
@@ -95,6 +116,22 @@ def register_ajax(request):
     if row_obj:
         return HttpResponse('username exist')
     else:
+        UserInfo.objects.create(username=username, password=password)
         return HttpResponse('success')
+
+
+@csrf_exempt
+def login_ajax(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    row_obj = UserInfo.objects.filter(username=username).first()
+    if not row_obj:
+        return HttpResponse('username not exist')
+    if row_obj.password != password:
+        return HttpResponse('wrong password')
+    response = HttpResponse('success')
+    response.set_cookie('username', username, expires=60*60*24*30*12*100)
+    response.set_cookie('password', password, expires=60*60*24*30*12*100)
+    return response
 
 
