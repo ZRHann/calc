@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}一元二次方程求解{% endblock %}
+{% block content %}
+<div class='container mt-3'>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class='input-group mb-3'>
+                <input placeholder="请输入A" , id="Abox" , class="form-control">
+            </div>
+            <div class='input-group mb-3'>
+                <input placeholder="请输入B" , id="Bbox" , class="form-control">
+            </div>
+            <div class='input-group mb-3'>
+                <input placeholder="请输入C" , id="Cbox" , class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <button type="button" class="btn btn-outline-primary" id="btn" style="display: block; margin:0 auto">求解
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            x1 = <input readonly="readonly" , id="x1Box" , class="form-control">
+            x2 = <input readonly="readonly" , id="x2Box" , class="form-control">
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.querySelector('#navYyec').classList.add('active');
+    let Abox = document.querySelector('#Abox');
+    let Bbox = document.querySelector('#Bbox');
+    let Cbox = document.querySelector('#Cbox');
+    let btn = document.querySelector('#btn');
+    let x1Box = document.querySelector('#x1Box');
+    let x2Box = document.querySelector('#x2Box');
+    btn.onclick = function () {
+        let x1Box = document.querySelector('#x1Box');
+        let x2Box = document.querySelector('#x2Box');
+        let a = parseFloat(Abox.value);
+        let b = parseFloat(Bbox.value);
+        let c = parseFloat(Cbox.value);
+        let delta = b * b - 4 * a * c;
+        let x1, x2;
+        if (a == 0) {
+            x1 = x2 = -c / b;
+        } else {
+            if (delta >= 0) {
+                x1 = (-b - Math.sqrt(delta)) * 0.5 / a;
+                x2 = (-b + Math.sqrt(delta)) * 0.5 / a;
+            } else {
+                if ((b * b - 4 * a * c) < 0) {
+                    x1 = -b / 2 * a + "-" + Math.pow(4 * a * c - b * b, 1 / 2) / 2 * a + "i";
+                    x2 = -b / 2 * a + "+" + Math.pow(4 * a * c - b * b, 1 / 2) / 2 * a + "i";
+                } else {
+                    x1 = (-b - Math.pow(b * b - 4 * a * c, 1 / 2)) / 2 * a;
+                    x2 = (-b + Math.pow(b * b - 4 * a * c, 1 / 2)) / 2 * a;
+                }
+            }
+        }
+        x1Box.value = x1;
+        x2Box.value = x2;
+    }
+</script>
+{% endblock %}

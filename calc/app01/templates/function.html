@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}函数求值{% endblock %}
+{% block head %}
+    <!-- latex公式 -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+        });
+
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+
+
+
+
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class='container mt-3'>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class='input-group mb-3'>
+                    <span class="input-group-text"><b style="font-size: 16px;">f(x)=</b></span>
+                    <input placeholder="请输入函数表达式（自变量必须为x）" , id="fxbox" , class="form-control" name='fxbox' ,
+                           value="{{ fxbox }}">
+                </div>
+                <div class='input-group mb-3'>
+                    <span class="input-group-text"><b style="font-size: 16px;">x=</b></span>
+                    <input placeholder="请输入自变量x的值" , id="xbox" , class="form-control" name='xbox'
+                           value="{{ xbox }}">
+                </div>
+                <div class="col-lg-4">
+                    <button value="求值" class="btn  btn-outline-primary" id="qzBTN" style="width: 100%">求值</button>
+                </div>
+                <div class='input-group mb-3' style="margin-top: 15px;">
+                    <span class="input-group-text"><b style="font-size: 16px;">函数值为</b></span>
+                    <input readonly="readonly" , id="answerBox" , class="form-control" value="{{ answer }}">
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px">
+            <div class="col-lg-6 offset-lg-3">
+                <p style="color: red;">请严格按照Python表达式语法输入。</p>
+                <p style="color: red;">请使用英文输入法（或半角符号）。</p>
+                <p>支持数学函数。以下为部分Python数学函数和表达式语法：</p>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>数学表达式</th>
+                        <th>Python语法</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>\( 3x \)</td>
+                        <td><code>3*x</code></td>
+                    </tr>
+                    <tr>
+                        <td>\(4/3\)</td>
+                        <td><code>4/3</code></td>
+                    </tr>
+                    <tr>
+                        <td>\( \lfloor 4/3 \rfloor \)</td>
+                        <td><code>4//3</code></td>
+                    </tr>
+                    <tr>
+                        <td>\( a^b \)</td>
+                        <td><code>pow(a, b)</code></td>
+                    </tr>
+                    <tr>
+                        <td>\( \ln x \)</td>
+                        <td><code>log(x)</code></td>
+                    </tr>
+                    <tr>
+                        <td>\( log_2 3 \)</td>
+                        <td><code>log(3)/log(2)</code>（对数换底公式）</td>
+                    </tr>
+                    <tr>
+                        <td>\( \sin(x) \)</td>
+                        <td><code>sin(x)</code></td>
+                    </tr>
+                    <tr>
+                        <td>\( \arcsin(x) \)</td>
+                        <td><code>asin(x)</code></td>
+                    </tr>
+                    <tr>
+                        <td>\( \sqrt{x} \)</td>
+                        <td><code>sqrt(x)</code> 或 <code>pow(x, 0.5)</code></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelector('#navFunction').classList.add('active');
+        let qzBTN = document.querySelector('#qzBTN');
+        let fxbox = document.querySelector('#fxbox');
+        $(function () {
+            //禁用“确认重新提交表单”
+            window.history.replaceState(null, null, window.location.href);
+        })
+        let xbox = document.querySelector('#xbox');
+        xbox.oninput = function () {
+            xbox.value = xbox.value.replace(/[^\d\.]/g, '')
+        }
+
+
+        qzBTN.onclick = function () {
+            $.ajax({
+                url: '/function/ajax/',
+                type: "post",
+                data: {
+                    fxbox: fxbox.value,
+                    xbox: xbox.value,
+                },
+                dataType: "JSON",
+                success: function (res) {
+                    console.log(res);
+                    answerBox.value = res['answer'];
+                }
+            })
+        }
+
+
+
+    </script>
+{% endblock %}

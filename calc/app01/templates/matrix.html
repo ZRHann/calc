@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}矩阵工具{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static '/css/matrix.css' %}">
+{% endblock %}
+{% block content %}
+    <script>
+        document.querySelector('#navMatrix').classList.add('active');
+    </script>
+
+
+    <div class="container">
+        <div class="row" style="margin-top: 10px">
+            <div class="col-lg-12">
+                <div class="input-group">
+                    <textarea type="text" class="form-control" wrap="off" placeholder="1 2 3
+4 5 6
+7 8 9" id="matrixBox"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class='row' style="margin-top: 15px">
+            <div class="col-lg-2">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="font-size: 15px">保留小数位数</span>
+                    </div>
+                    <input type="text" class="form-control" value="3" style="width: 10px;" id="fixnumBox">
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-outline-primary" style="width: 100%" id="hjhBTN">行简化
+                </button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-outline-primary" style="width: 100%" id="qhlsBTN">求行列式
+                </button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-outline-primary" style="width: 100%" id="qnBTN">求逆
+                </button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-outline-primary" style="width: 100%" id="qzBTN">求秩
+                </button>
+            </div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-outline-primary" style="width: 100%" id="zzBTN">转置
+                </button>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 0px">
+            <div class="col-lg-12">
+                <div class="input-group">
+                    <textarea type="text" class="form-control" id="answerBox" readonly="1" wrap="off"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {#    <script src="{% static 'js/matrix.js' %}" type="text/javascript"></script>#}
+    <script>
+        let hjhBTN = document.querySelector('#hjhBTN');
+        let matrixBox = document.querySelector('#matrixBox');
+        let answerBox = document.querySelector('#answerBox');
+        let fixnumBox = document.querySelector('#fixnumBox');
+        let zzBTN = document.querySelector('#zzBTN');
+        let qhlsBTN = document.querySelector('#qhlsBTN');
+        let qnBTN = document.querySelector('#qnBTN');
+        let qzBTN = document.querySelector('#qzBTN');
+        let eps = 0.00000000001;
+        matrixBox.oninput = function () {
+            matrixBox.value = matrixBox.value.replace(/[^\d\.\s-]/g, '');
+        }
+
+        fixnumBox.oninput = function () {
+            fixnumBox.value = fixnumBox.value.replace(/[^\d]/g, '');
+        }
+
+        function printA() {
+            for (let i = 0; i < m; ++i) {
+                console.log(a[i].slice(0, n));
+            }
+        }
+
+        function getA() {
+            //去除开头结尾的空格和换行
+            let rows = matrixBox.value.trim().split(/(?: *)\n(?: *)/g);
+            console.log(rows);
+            let m = rows.length, n = 0;
+            let tmpa = new Array(m).fill(new Array(0));//临时的a数组
+            //检测矩阵是否合法，并输入a数组
+            for (let i in rows) {
+                let cols = rows[i].split(/ +/gm);
+                {#console.log(cols);#}
+                if (n != 0 && n != cols.length) {
+                    console.log('ERR-1: 矩阵非矩形');
+                    answerBox.value = 'ERR-1: 矩阵非矩形';
+                    return -1;
+                }
+                n = cols.length;
+                for (let j in cols) {
+                    if (isNaN(parseFloat(cols[j]))) {
+                        console.log('ERR-2: 含有非数字元素');
+                        answerBox.value = 'ERR-2: 含有非数字元素';
+                        return -2;
+                    }
+                    cols[j] = parseFloat(cols[j]);
+                }
+                tmpa[i] = cols;
+            }
+            return tmpa;
+        }
+
+        function HJH(a) {  //行简化(RREF)
+            let m = a.length, n = a[0].length;
+            for (let r = 0, c = 0; c < n && r < m; c++)   //遍历每一列
+            {
+                let t = r;
+                for (let i = r; i < m; i++)                       //找到这一列中元素最大的一行
+                    if (Math.abs(a[i][c]) > Math.abs(a[t][c]))
+                        t = i;
+                if (Math.abs(a[t][c]) < eps) continue;    //如果元素最大，还是0，那就跳过，去处理下一列
+                for (let i = 0; i < n; i++) {
+                    // swap(a[t][i], a[r][i]);
+                    let temp = a[t][i];
+                    a[t][i] = a[r][i];
+                    a[r][i] = temp;
+                }
+                //把选中的这一行放到“最上面”去
+                let d = a[r][c];
+                for (let i = 0; i < n; i++) a[r][i] /= d;    //把这一行的第c列化成1
+                for (let i = r + 1; i < m; i++)             //把其他行的第c列消成0
+                    if (Math.abs(a[i][c]) > eps) {
+                        let p = a[i][c];
+                        for (let j = 0; j < n; j++)
+                            a[i][j] -= p * a[r][j];
+                    }
+                r++;
+            }
+            //回代
+            for (let r = m - 1; r >= 0; --r) {
+                //找第一个不为0的
+                let zyl = -1;
+                for (let c = 0; c < n; ++c) {
+                    if (Math.abs(a[r][c]) > eps) {
+                        zyl = c;
+                        break;
+                    }
+                }
+                if (zyl == -1) {//这一行都是0
+                    continue;
+                }
+                if (zyl == n - 1) {
+                    return;
+                }
+                //除了这一行是1，主元列必须是0
+                for (let i = 0; i < r; ++i) { //这一行 -= a[i][zyl] * r行
+                    let p = a[i][zyl];
+                    for (let j = 0; j < n; ++j) {
+                        a[i][j] -= p * a[r][j];
+                    }
+                }
+            }
+            return a;
+        }
+
+        function det(square) {
+            // 方阵约束
+            if (square.length !== square[0].length) {
+                throw new Error();
+            }
+            // 方阵阶数
+            let n = square.length;
+
+            let result = 0;
+            if (n > 3) {
+                // n 阶
+                for (let column = 0; column < n; column++) {
+                    // 去掉第 0 行第 column 列的矩阵
+                    let matrix = new Array(n - 1).fill(0).map(arr => new Array(n - 1).fill(0));
+                    for (let i = 0; i < n - 1; i++) {
+                        for (let j = 0; j < n - 1; j++) {
+                            if (j < column) {
+                                matrix[i][j] = square[i + 1][j];
+                            } else {
+                                matrix[i][j] = square[i + 1][j + 1];
+                            }
+                        }
+                    }
+                    result += square[0][column] * Math.pow(-1, 0 + column) * det(matrix);
+                }
+            } else if (n === 3) {
+                // 3 阶
+                result = square[0][0] * square[1][1] * square[2][2] +
+                    square[0][1] * square[1][2] * square[2][0] +
+                    square[0][2] * square[1][0] * square[2][1] -
+                    square[0][2] * square[1][1] * square[2][0] -
+                    square[0][1] * square[1][0] * square[2][2] -
+                    square[0][0] * square[1][2] * square[2][1];
+            } else if (n === 2) {
+                // 2 阶
+                result = square[0][0] * square[1][1] - square[0][1] * square[1][0];
+            } else if (n === 1) {
+                // 1 阶
+                result = square[0][0];
+            }
+            return result;
+            {#原文链接：https://blog.csdn.net/XY1790026787/article/details/106144101#}
+        }
+
+        function transpose(matrix) {
+            let result = new Array(matrix.length).fill(0).map(arr => new Array(matrix[0].length).fill(0));
+            for (let i = 0; i < result.length; i++) {
+                for (let j = 0; j < result[0].length; j++) {
+                    result[i][j] = matrix[j][i];
+                }
+            }
+            return result;
+        }
+
+        function printMatrixToAnswerBox(a) {
+            //获取最长数字
+            let maxlen = 0;
+            let m = a.length, n = a[0].length;
+            let fixnum = parseInt(fixnumBox.value);
+            for (let i = 0; i < m; ++i) {
+                for (let j = 0; j < n; ++j) {
+                    if (Math.abs(a[i][j]) < eps) {
+                        a[i][j] = 0.0;
+                    }
+                    if (a[i][j].toFixed(fixnum).toString().length > maxlen) {
+                        maxlen = a[i][j].toFixed(fixnum).toString().length;
+                    }
+                }
+            }
+
+            //格式化输出矩阵到答案框
+            let ans = '';
+            for (let i = 0; i < m; ++i) {
+                for (let j = 0; j < n; ++j) {
+                    ans += a[i][j].toFixed(fixnum).toString();
+                    //加入空格
+                    for (let k = 1; k <= maxlen - a[i][j].toFixed(fixnum).toString().length + 3; ++k) {
+                        ans += ' ';
+                    }
+                }
+                ans += '\n';
+            }
+            {#console.log(ans);#}
+            answerBox.value = ans;
+        }
+
+        function adjoint(square) { //伴随矩阵
+            // 方阵约束
+            if (square[0].length !== square.length) {
+                throw new Error();
+            }
+
+            let n = square.length;
+
+            let result = new Array(n).fill(0).map(arr => new Array(n).fill(0));
+            for (let row = 0; row < n; row++) {
+                for (let column = 0; column < n; column++) {
+                    // 去掉第 row 行第 column 列的矩阵
+                    let matrix = [];
+                    for (let i = 0; i < square.length; i++) {
+                        if (i !== row) {
+                            let arr = [];
+                            for (let j = 0; j < square.length; j++) {
+                                if (j !== column) {
+                                    arr.push(square[i][j]);
+                                }
+                            }
+                            matrix.push(arr);
+                        }
+                    }
+                    result[row][column] = Math.pow(-1, row + column) * det(matrix);
+                }
+            }
+            return transpose(result);
+        }
+
+        function inv(square) { //逆矩阵
+            if (square[0].length !== square.length) {
+                throw new Error();
+            }
+            let detValue = det(square);
+            let result = adjoint(square);
+
+            for (let i = 0; i < result.length; i++) {
+                for (let j = 0; j < result.length; j++) {
+                    result[i][j] /= detValue;
+                }
+            }
+            return result;
+        }
+
+
+        hjhBTN.onclick = function () { //计算行简化
+            let fixnum = parseInt(fixnumBox.value);
+            let a = getA();
+            if (typeof a == "number") {
+                return;
+            }
+            let m = a.length, n = a[0].length;
+            HJH(a);
+            printMatrixToAnswerBox(a);
+        }
+
+        qhlsBTN.onclick = function () { //行列式
+            let fixnum = parseInt(fixnumBox.value)
+            let a = getA();
+            if (typeof a == 'number') return;
+            if (a.length != a[0].length) {
+                answerBox.value = 'ERR-3:  不是n*n矩阵，无行列式';
+                return;
+            }
+            let res = det(a);
+            answerBox.value = res.toFixed(fixnum);
+
+        }
+
+        zzBTN.onclick = function () {
+            let a = getA();
+            if (typeof a == 'number') return;
+            a = transpose(a);
+            printMatrixToAnswerBox(a);
+        }
+
+        qnBTN.onclick = function () {
+            let a = getA();
+            if (typeof a == 'number') return;
+            if (a.length != a[0].length) {
+                answerBox.value = 'ERR-3:  不是n*n矩阵，无逆矩阵';
+                return;
+            }
+            if(det(a) == 0) {
+                answerBox.value = '该矩阵不可逆';
+                return;
+            }
+            a = inv(a);
+            printMatrixToAnswerBox(a);
+        }
+
+        qzBTN.onclick = function () {
+            answerBox.value = '还没写好';
+        }
+    </script>
+{% endblock %}

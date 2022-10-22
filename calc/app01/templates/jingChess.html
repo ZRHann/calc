@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}井字棋{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/jingChess.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <td class="cell" id="0"></td>
+        <td class="cell" id="1"></td>
+        <td class="cell" id="2"></td>
+    </tr>
+    <tr>
+        <td class="cell" id="3"></td>
+        <td class="cell" id="4"></td>
+        <td class="cell" id="5"></td>
+    </tr>
+    <tr>
+        <td class="cell" id="6"></td>
+        <td class="cell" id="7"></td>
+        <td class="cell" id="8"></td>
+    </tr>
+</table>
+<div class="endgame">
+    <div class="text"></div>
+</div>
+<button onclick="startGame()" class="btn btn-dark">重新开始</button>
+<script>
+    document.querySelector('#navJingChess').classList.add('active');
+</script>
+<script src="{% static 'js/jingChess.js' %}"></script>
+{% endblock %}

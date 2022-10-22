@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}注册{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="input-group mb-3 col-lg-6 offset-lg-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" >用户名</span>
+            </div>
+            <input type="text" class="form-control" placeholder="请输入用户名" id="usernameBox">
+        </div>
+
+        <div class="input-group mb-3 col-lg-6 offset-lg-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" >密码</span>
+            </div>
+            <input type="text" class="form-control" placeholder="请输入密码" id="passwordBox">
+        </div>
+        <div class="row">
+            <div class="col-lg-2 offset-lg-5">
+                <button type="button" class="btn btn-outline-primary" style="width: 100%" id="zcBTN">注册</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let zcBTN = document.querySelector('#zcBTN');
+        let usernameBox = document.querySelector('#usernameBox');
+        let passwordBox = document.querySelector('#passwordBox');
+        zcBTN.onclick = function () {
+            if(usernameBox.value.length <= 3) {
+                alert('用户名长度需>3');
+                return;
+            }
+            if(passwordBox.value.length <= 5) {
+                alert('密码长度需>5');
+                return;
+            }
+            $.ajax({
+                url: '/register/ajax/',
+                type: "post",
+                data: {
+                    username: usernameBox.value,
+                    password: passwordBox.value,
+                },
+                success: function (res) {
+                    if (res=='success') {
+                        alert('注册成功, 点击前往登录');
+                        window.location.href = '/../login/';
+                    }
+                    else if(res=='username exist') {
+                        alert('用户名已被注册');
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock %}

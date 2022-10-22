@@ -1,0 +1,30 @@
+#matrixBox::-webkit-scrollbar, #answerBox::-webkit-scrollbar{
+	 width: 6px;
+	 height: 6px;
+}
+#matrixBox::-webkit-scrollbar-thumb, #answerBox::-webkit-scrollbar-thumb{
+	border-radius: 3px;
+  	-moz-border-radius: 3px;
+  	-webkit-border-radius: 3px;
+  	background-color: #c3c3c3;
+}
+#matrixBox::-webkit-scrollbar-track, #answerBox::-webkit-scrollbar-track{
+	background-color: transparent;
+}
+
+#matrixBox, #answerBox {
+	height: 290px;
+	font-size: 18px;
+	font-family: Consolas;
+	overflow: scroll;
+}
+
+.hjhBTN {
+	height: 38px;
+}
+
+.qnBTN {
+	height: 38px;
+	/*margin-top: 10px;*/
+}
+
