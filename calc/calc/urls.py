@@ -36,4 +36,5 @@ urlpatterns = [
     path('logout/ajax/', views.logout_ajax),
 
     path('changePassword/', views.changePassword),
+    path('changePassword/ajax/', views.changePassword_ajax),
 ]

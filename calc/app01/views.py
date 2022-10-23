@@ -146,3 +146,27 @@ def changePassword(request):
     currentUsername = getUsername(request)
     return render(request, 'changePassword.html', {'currentUsername': currentUsername})
 
+
+@csrf_exempt
+def changePassword_ajax(request):
+    CKusername = getUsername(request)
+    OldPassword = request.POST['OldPassword']
+    NewPassword = request.POST['NewPassword']
+    if not CKusername:
+        return HttpResponse('Please Login First')
+    else:
+        obj = UserInfo.objects.filter(username=CKusername).first()
+        realPassword = obj.password
+        if OldPassword != realPassword:
+            return HttpResponse('Wrong OldPassword')
+        UserInfo.objects.filter(username = CKusername).update(password=NewPassword)
+        response = HttpResponse('Success')
+        response.delete_cookie('username')
+        response.delete_cookie('password')
+        return response
+
+
+
+
+
+
