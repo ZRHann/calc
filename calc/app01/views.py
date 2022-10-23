@@ -4,7 +4,6 @@ import requests
 import random
 import json
 from app01 import mathrepl
-from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
 from app01.models import UserInfo
 
