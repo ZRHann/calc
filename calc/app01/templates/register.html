@@ -8,14 +8,14 @@
     <div class="container mt-3">
         <div class="input-group mb-3 col-lg-6 offset-lg-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" >用户名</span>
+                <span class="input-group-text">用户名</span>
             </div>
             <input type="text" class="form-control" placeholder="请输入用户名" id="usernameBox">
         </div>
 
         <div class="input-group mb-3 col-lg-6 offset-lg-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" >密码</span>
+                <span class="input-group-text">密码</span>
             </div>
             <input type="text" class="form-control" placeholder="请输入密码" id="passwordBox">
         </div>
@@ -25,18 +25,48 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="ErrorModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ErrorModalH5"></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="RegisterSuccessModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">注册成功</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">点击前往登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
+        document.querySelector('#navRegister').classList.add('active');
         let zcBTN = document.querySelector('#zcBTN');
         let usernameBox = document.querySelector('#usernameBox');
         let passwordBox = document.querySelector('#passwordBox');
+        let ErrorModalH5 = document.querySelector('#ErrorModalH5');
         zcBTN.onclick = function () {
-            if(usernameBox.value.length <= 3) {
-                alert('用户名长度需>3');
+            if (usernameBox.value.length <= 3) {
+                ErrorModalH5.innerHTML = "用户名长度需>3"
+                $('#ErrorModal').modal();
                 return;
             }
-            if(passwordBox.value.length <= 5) {
-                alert('密码长度需>5');
+            if (passwordBox.value.length <= 5) {
+                ErrorModalH5.innerHTML = "密码长度需>5"
+                $('#ErrorModal').modal();
                 return;
             }
             $.ajax({
@@ -47,15 +77,17 @@
                     password: passwordBox.value,
                 },
                 success: function (res) {
-                    if (res=='success') {
-                        alert('注册成功, 点击前往登录');
-                        window.location.href = '/../login/';
-                    }
-                    else if(res=='username exist') {
-                        alert('用户名已被注册');
+                    if (res == 'success') {
+                        $('#RegisterSuccessModal').modal();
+                    } else if (res == 'username exist') {
+                        ErrorModalH5.innerHTML = "用户名已被注册"
+                        $('#ErrorModal').modal();
                     }
                 }
             })
         }
+        $('#RegisterSuccessModal').on('hidden.bs.modal', function (e) {
+            window.location.href = '/../login/';
+        })
     </script>
 {% endblock %}

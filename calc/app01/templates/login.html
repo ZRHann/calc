@@ -8,14 +8,14 @@
     <div class="container mt-3">
         <div class="input-group mb-3 col-lg-6 offset-lg-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" >用户名</span>
+                <span class="input-group-text">用户名</span>
             </div>
             <input type="text" class="form-control" placeholder="请输入用户名" id="usernameBox">
         </div>
 
         <div class="input-group mb-3 col-lg-6 offset-lg-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" >密码</span>
+                <span class="input-group-text">密码</span>
             </div>
             <input type="text" class="form-control" placeholder="请输入密码" id="passwordBox">
         </div>
@@ -26,7 +26,38 @@
         </div>
     </div>
 
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="loginSuccessModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">登录成功</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">点击返回主页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="UsernameOrPasswordWrongModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">用户名或密码错误</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
+    document.querySelector('#navLogin').classList.add('active');
         let dlBTN = document.querySelector('#dlBTN');
         dlBTN.onclick = function () {
             $.ajax({
@@ -37,14 +68,18 @@
                     password: passwordBox.value,
                 },
                 success: function (res) {
-                    if (res=='success') {
-                        alert('登录成功');
-                    }
-                    else {
-                        alert('用户名或密码错误');
+                    if (res == 'success') {
+                        $('#loginSuccessModal').modal();
+
+                    } else {
+                        $('#UsernameOrPasswordWrongModal').modal();
                     }
                 }
             })
         }
+        $('#loginSuccessModal').on('hidden.bs.modal', function (e) {
+            window.location.href = '../index/'
+        })
+
     </script>
 {% endblock %}

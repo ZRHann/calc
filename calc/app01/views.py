@@ -134,3 +134,15 @@ def login_ajax(request):
     return response
 
 
+@csrf_exempt
+def logout_ajax(request):
+    response = HttpResponse("success")
+    response.delete_cookie('username')
+    response.delete_cookie('password')
+    return response
+
+
+def changePassword(request):
+    currentUsername = getUsername(request)
+    return render(request, 'changePassword.html', {'currentUsername': currentUsername})
+
