@@ -86,9 +86,15 @@
         }
 
         function getA() {
+            //矩阵是否为空
+            if(matrixBox.value.trim() == '') {
+                answerBox.value = 'ERR-4: 矩阵为空';
+                return -1;
+            }
             //去除开头结尾的空格和换行
+
             let rows = matrixBox.value.trim().split(/(?: *)\n(?: *)/g);
-            console.log(rows);
+            {#console.log(rows);#}
             let m = rows.length, n = 0;
             let tmpa = new Array(m).fill(new Array(0));//临时的a数组
             //检测矩阵是否合法，并输入a数组
@@ -212,7 +218,7 @@
         }
 
         function transpose(matrix) {
-            let result = new Array(matrix.length).fill(0).map(arr => new Array(matrix[0].length).fill(0));
+            let result = new Array(matrix[0].length).fill(0).map(arr => new Array(matrix.length).fill(0));
             for (let i = 0; i < result.length; i++) {
                 for (let j = 0; j < result[0].length; j++) {
                     result[i][j] = matrix[j][i];
