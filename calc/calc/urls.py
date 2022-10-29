@@ -37,4 +37,11 @@ urlpatterns = [
 
     path('changePassword/', views.changePassword),
     path('changePassword/ajax/', views.changePassword_ajax),
+
+    path('AddArticle/', views.AddArticle),
+    path('AddArticle/ajax/', views.AddArticle_ajax),
+
+    path('MyArticle/', views.MyArticle),
+
+    path('MyArticle/DeleteArticle/ajax/', views.DeleteArticle_ajax),
 ]

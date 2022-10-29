@@ -6,13 +6,16 @@ import json
 from app01 import mathrepl
 from django.views.decorators.csrf import csrf_exempt
 from app01.models import UserInfo
-
+from app01.models import ArticleInfo
+import time
+import string
 
 # 传入request，判断是否有已登录的Cookie
 def getUsername(request):
     CKusername = request.COOKIES.get('username')
     CKpassword = request.COOKIES.get('password')
     obj = UserInfo.objects.filter(username=CKusername).first()
+    # print(obj)
     if not obj:
         return -1
     if obj.password != CKpassword:
@@ -21,6 +24,16 @@ def getUsername(request):
 
 
 def index(request):
+    currentUsername = getUsername(request)
+    ArticleList = ArticleInfo.objects.all()
+    dict = {
+        'ArticleList': ArticleList,
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'index.html', dict)
+
+
+def bingpic(request):
     currentUsername = getUsername(request)
     print(currentUsername)
     idx = random.randint(-1, 10)
@@ -44,7 +57,7 @@ def index(request):
         'imgTitle': dictcode['images'][0]['title'],
         'currentUsername': currentUsername,
     }
-    return render(request, 'index.html', dict)
+    return render(request, 'bingpic.html', dict)
 
 
 def empty(request):
@@ -106,9 +119,8 @@ def register(request):
 
 @csrf_exempt
 def register_ajax(request):
-    # print(request.POST)
+    print(request.POST)
     username = request.POST['username']
-
     print(username)
     password = request.POST['password']
     row_obj = UserInfo.objects.filter(username=username).first()
@@ -166,7 +178,44 @@ def changePassword_ajax(request):
         return response
 
 
+def AddArticle(request):
+    currentUsername = getUsername(request)
+    dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'AddArticle.html', dict)
 
 
+@csrf_exempt
+def AddArticle_ajax(request):
+    currentUsername = getUsername(request)
+    if(currentUsername == -1):
+        return HttpResponse('Please Login')
+    title = request.POST['title']
+    content = request.POST['content']
+    PostTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    seed = ''.join(random.sample(string.ascii_letters + string.digits, 32))
+    # print(seed)
+    username = currentUsername
+    ArticleInfo.objects.create(title=title, content=content, seed=seed, username=username, PostTime=PostTime)
+    return HttpResponse('Article successfully added')
+
+
+def MyArticle(request):
+    currentUsername = getUsername(request)
+    ArticleList = ArticleInfo.objects.filter(username=currentUsername)
+    dict = {
+        'currentUsername': currentUsername,
+        'ArticleList': ArticleList,
+    }
+    return render(request, 'MyArticle.html', dict)
+
+
+@csrf_exempt
+def DeleteArticle_ajax(request):
+    PostTime = request.POST['PostTime']
+    seed = request.POST['seed']
+    ArticleInfo.objects.filter(PostTime=PostTime, seed=seed).delete()
+    return HttpResponse('Successfully Deleted')
 
 

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}新建文章{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="mt-3">
+            <div class="form-group">
+                <label for="TitleArea">标题</label>
+                <textarea class="form-control" id="TitleArea" rows="3" placeholder="请输入标题"></textarea>
+            </div>
+        </form>
+        <form class="mt-3">
+            <div class="form-group">
+                <label for="ContentArea">文章内容</label>
+                <textarea class="form-control" id="ContentArea" rows="3" placeholder="请输入文章内容"></textarea>
+            </div>
+        </form>
+        <button type="button" class="btn btn-dark" id="AddArticleBTN">新建文章</button>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="ErrorModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ErrorModalH5"></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="SuccessModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">新建文章成功</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let currentUsername = '{{ currentUsername }}';
+        $('#AddArticleBTN').click(function () {
+            if (currentUsername == '-1') {
+                $('#ErrorModalH5').text('请先登录');
+                $('#ErrorModal').modal();
+                return;
+            }
+            $.ajax({
+                url: '/AddArticle/ajax/',
+                type: "post",
+                data: {
+                    title: $('#TitleArea').val(),
+                    content: $('#ContentArea').val()
+                },
+                success: function (res) {
+                    if (res == 'Please Login') {
+                        $('#ErrorModalH5').text('请先登录');
+                        $('#ErrorModal').modal();
+                        return;
+                    }
+                    else if(res=='Article successfully added') {
+                        $('#SuccessModal').modal();
+                        return;
+                    }
+                }
+            })
+        })
+    </script>
+
+
+{% endblock %}

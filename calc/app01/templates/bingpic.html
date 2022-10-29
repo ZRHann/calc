@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}主页{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/bingpic.css' %}">
+{% endblock %}
+
+{% block content %}
+<img src="{{ imgUrl }}" class="bingImg">
+
+<li class="liBingText">
+    <ul class="ulBingText">
+        <div class="bingText">
+            <div class="icon container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-geo-alt-fill"
+                     viewBox="0 0 16 16" style="color: white;">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                </svg>
+            </div>
+            <div class="bingTitle">
+                <h1 class="bingTitleH1">{{ imgTitle }}</h1>
+            </div>
+        </div>
+    </ul>
+    <ul class="ulBingTextToShow">
+        <div class="linkerDiv">
+            <p></p>
+        </div>
+        <div class="BingTextToShow">
+            <a class="BingTextToShowH1" href="{{ imgCopyrightlink }}">{{ imgCopyright }}</a>
+            <h2 class="BingTextToShowH2">{{ imgCopyrighten }}</h2>
+        </div>
+    </ul>
+</li>
+
+
+<script>
+    {#document.querySelector('#navIndex').classList.add('active');#}
+    let bingText = document.querySelector('.bingText');
+    let ulBingText = document.querySelector('.ulBingText');
+    let bingTextToShow = document.querySelector('.BingTextToShow');
+    let ulBingTextToShow = document.querySelector('.ulBingTextToShow');
+    let liBingText = document.querySelector('.liBingText');
+    ulBingTextToShow.style.display = 'none';
+    liBingText.onmouseover = function () {
+        ulBingTextToShow.style.display = '';
+    }
+    liBingText.onmouseout = function () {
+        ulBingTextToShow.style.display = 'none';
+    }
+    liBingText.onmouseover = function () {
+        ulBingTextToShow.style.display = '';
+    }
+    liBingText.onmouseout = function () {
+        ulBingTextToShow.style.display = 'none';
+    }
+</script>
+
+{% endblock %}

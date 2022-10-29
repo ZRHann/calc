@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}我的文章{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+    <dev class="container">
+        <div class="offset-lg-3 mb-3">
+            <button type="button" class="btn btn-dark" id="NewArticleBTN">新建文章</button>
+        </div>
+        {% for article in ArticleList %}
+            <div class="card mb-3 col-lg-6 offset-lg-3" data-PostTime="{{ article.PostTime }}"
+                 data-seed="{{ article.seed }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.content }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">{{ article.PostTime }}</small>
+                        <small class="text-muted ml-3">{{ article.username }}</small>
+                        <small class="text-muted ml-3" style="position: absolute; right: 50px">
+                            <a class="DeleteA"
+                               class="text-decoration-none"
+                               href="javascript:void(0);"
+                               data-PostTime="{{ article.PostTime }}"
+                               data-seed="{{ article.seed }}"
+                               data-title="{{ article.title }}"
+                               style="color: inherit;">删除
+                            </a>
+                        </small>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </dev>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="ErrorModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ErrorModalH5"></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="SuccessModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">新建文章成功</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ConfirmDeleteModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">你确定要删除文章吗</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="ModalBodyP">文章标题：</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger"
+                            id="ConfirmDeleteBTN"
+                            data-PostTime=""
+                            data-seed="">
+                        确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('#navIndex').classList.add('active');
+        let currentUsername = '{{ currentUsername }}';
+        if (currentUsername == '-1') {
+            $('#ErrorModalH5').text("请先登录");
+            $('#ErrorModal').modal();
+        }
+        $('#ErrorModal').on('hidden.bs.modal', function (event) {
+            window.location.href = '../login/';
+        })
+
+        $('.DeleteA').click(
+            function () {
+                let PostTime = $(this).attr('data-PostTime');
+                let seed = $(this).attr('data-seed');
+                $('#ConfirmDeleteBTN').attr('data-PostTime', PostTime);
+                $('#ConfirmDeleteBTN').attr('data-seed', seed);
+                $('#ModalBodyP').text("文章标题：" + $(this).attr('data-title'));
+                $('#ConfirmDeleteModal').modal();
+            }
+        )
+        $('#ConfirmDeleteBTN').click(
+            function () {
+                let PostTime = $(this).attr('data-PostTime');
+                let seed = $(this).attr('data-seed');
+                $.ajax(
+                    {
+
+                        url: "DeleteArticle/ajax/",
+                        type: "post",
+                        data: {
+                            PostTime: PostTime,
+                            seed: seed,
+                        },
+                        success: function (res) {
+                            console.log(res);
+                            let s=".card[data-PostTime='";
+                            s += PostTime;
+                            s+="'][data-seed='";
+                            s+=seed;
+                            s+="']";
+                            let temp = $(s)
+                            temp.hide();
+                            $('#ConfirmDeleteModal').modal('hide');
+                        }
+                    }
+                )
+            }
+        )
+        $('#NewArticleBTN').click(
+            function () {
+                window.location.href='../AddArticle/'
+            }
+        )
+
+    </script>
+
+{% endblock %}
+
+

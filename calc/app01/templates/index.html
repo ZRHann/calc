@@ -6,55 +6,25 @@
 {% endblock %}
 
 {% block content %}
-<img src="{{ imgUrl }}" class="bingImg">
 
-<li class="liBingText">
-    <ul class="ulBingText">
-        <div class="bingText">
-            <div class="icon container">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-geo-alt-fill"
-                     viewBox="0 0 16 16" style="color: white;">
-                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                </svg>
+
+    <dev class="container">
+        {% for article in ArticleList %}
+            <div class="card mb-3 col-lg-6 offset-lg-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.content }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">{{ article.PostTime }}</small>
+                        <small class="text-muted ml-3">{{ article.username }}</small>
+                    </p>
+                </div>
             </div>
-            <div class="bingTitle">
-                <h1 class="bingTitleH1">{{ imgTitle }}</h1>
-            </div>
-        </div>
-    </ul>
-    <ul class="ulBingTextToShow">
-        <div class="linkerDiv">
-            <p></p>
-        </div>
-        <div class="BingTextToShow">
-            <a class="BingTextToShowH1" href="{{ imgCopyrightlink }}">{{ imgCopyright }}</a>
-            <h2 class="BingTextToShowH2">{{ imgCopyrighten }}</h2>
-        </div>
-    </ul>
-</li>
+        {% endfor %}
+    </dev>
 
-
-<script>
-    document.querySelector('#navIndex').classList.add('active');
-    let bingText = document.querySelector('.bingText');
-    let ulBingText = document.querySelector('.ulBingText');
-    let bingTextToShow = document.querySelector('.BingTextToShow');
-    let ulBingTextToShow = document.querySelector('.ulBingTextToShow');
-    let liBingText = document.querySelector('.liBingText');
-    ulBingTextToShow.style.display = 'none';
-    liBingText.onmouseover = function () {
-        ulBingTextToShow.style.display = '';
-    }
-    liBingText.onmouseout = function () {
-        ulBingTextToShow.style.display = 'none';
-    }
-    liBingText.onmouseover = function () {
-        ulBingTextToShow.style.display = '';
-    }
-    liBingText.onmouseout = function () {
-        ulBingTextToShow.style.display = 'none';
-    }
-</script>
+    <script>
+        document.querySelector('#navIndex').classList.add('active');
+    </script>
 
 {% endblock %}
