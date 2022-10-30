@@ -57,7 +57,7 @@
         </div>
     </div>
     <script>
-    document.querySelector('#navLogin').classList.add('active');
+        document.querySelector('#navLogin').classList.add('active');
         let dlBTN = document.querySelector('#dlBTN');
         dlBTN.onclick = function () {
             $.ajax({
@@ -80,6 +80,19 @@
         $('#loginSuccessModal').on('hidden.bs.modal', function (e) {
             window.location.href = '../index/'
         })
-
+        $('#passwordBox').keypress(
+            function (even) {
+                if (even.which == 13) {
+                    $('#dlBTN').click();
+                }
+            }
+        )
+        $('#loginSuccessModal').keypress(
+            function (even) {
+                if (even.which == 13) {
+                    $('#loginSuccessModal').modal('hide');
+                }
+            }
+        )
     </script>
 {% endblock %}

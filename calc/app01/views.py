@@ -26,7 +26,7 @@ def getUsername(request):
 
 def index(request):
     currentUsername = getUsername(request)
-    ArticleList = ArticleInfo.objects.all()
+    ArticleList = ArticleInfo.objects.all().order_by('-PostTime')
     Dict = {
         'ArticleList': ArticleList,
         'currentUsername': currentUsername,
@@ -36,7 +36,7 @@ def index(request):
 
 def BingPic(request):
     currentUsername = getUsername(request)
-    print(currentUsername)
+    # print(currentUsername)
     idx = random.randint(-1, 10)
     bing_api = "https://global.bing.com"
     header = {
@@ -203,7 +203,7 @@ def AddArticle_ajax(request):
 
 def MyArticle(request):
     currentUsername = getUsername(request)
-    ArticleList = ArticleInfo.objects.filter(username=currentUsername)
+    ArticleList = ArticleInfo.objects.filter(username=currentUsername).order_by('-PostTime')
     Dict = {
         'currentUsername': currentUsername,
         'ArticleList': ArticleList,

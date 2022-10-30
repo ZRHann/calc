@@ -16,7 +16,11 @@
             <div class="card mb-3 col-lg-6 offset-lg-3" data-PostTime="{{ article.PostTime }}"
                  data-seed="{{ article.seed }}">
                 <div class="card-body">
-                    <h5 class="card-title">{{ article.title }}</h5>
+                    <h5 class="card-title">
+                        <a href="../ViewArticle?PostTime={{ article.PostTime }}&seed={{ article.seed }}" class="text-decoration-none">
+                            {{ article.title }}
+                        </a>
+                    </h5>
                     <p class="card-text">{{ article.content }}</p>
                     <p class="card-text">
                         <small class="text-muted">{{ article.PostTime }}</small>
