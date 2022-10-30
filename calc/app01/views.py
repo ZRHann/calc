@@ -10,6 +10,7 @@ from app01.models import ArticleInfo
 import time
 import string
 
+
 # 传入request，判断是否有已登录的Cookie
 def getUsername(request):
     CKusername = request.COOKIES.get('username')
@@ -26,14 +27,14 @@ def getUsername(request):
 def index(request):
     currentUsername = getUsername(request)
     ArticleList = ArticleInfo.objects.all()
-    dict = {
+    Dict = {
         'ArticleList': ArticleList,
         'currentUsername': currentUsername,
     }
-    return render(request, 'index.html', dict)
+    return render(request, 'index.html', Dict)
 
 
-def bingpic(request):
+def BingPic(request):
     currentUsername = getUsername(request)
     print(currentUsername)
     idx = random.randint(-1, 10)
@@ -41,7 +42,8 @@ def bingpic(request):
     header = {
         "Origin": bing_api,
         "Host": bing_api.replace("https://", ""),
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/14.16299",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/58.0.3029.110 Safari/537.36 Edge/14.16299",
         "Referer": bing_api
     }
     url = 'https://cn.bing.com/HPImageArchive.aspx?format=js&idx=' + str(idx) + '&n=1'
@@ -49,7 +51,7 @@ def bingpic(request):
     code = requests.get(url=url, headers=header).text
     dictcode = json.loads(code)
     imgCopyrighten = re.findall(r' \(©.+', dictcode['images'][0]['copyright'])[0]
-    dict = {
+    Dict = {
         'imgUrl': 'https://cn.bing.com' + dictcode['images'][0]['url'],
         'imgCopyright': dictcode['images'][0]['copyright'].replace(imgCopyrighten, ''),
         'imgCopyrighten': imgCopyrighten,
@@ -57,11 +59,10 @@ def bingpic(request):
         'imgTitle': dictcode['images'][0]['title'],
         'currentUsername': currentUsername,
     }
-    return render(request, 'bingpic.html', dict)
+    return render(request, 'BingPic.html', Dict)
 
 
 def empty(request):
-    currentUsername = getUsername(request)
     return redirect('index/')
 
 
@@ -80,26 +81,25 @@ def function(request):
     return render(request, 'function.html', {'currentUsername': currentUsername})
 
 
-
 @csrf_exempt
 def function_ajax(request):
     fxbox = request.POST.get('fxbox')
     xbox = request.POST.get('xbox')
-    dict = {}
     if mathrepl.is_number(xbox):
         answer = mathrepl.calculateFx(fxbox, float(xbox))
-        dict = {
+        Dict = {
             'fxbox': fxbox,
             'xbox': xbox,
             'answer': answer
         }
+        return HttpResponse(json.dumps(Dict))
     else:
-        dict = {
+        Dict = {
             'fxbox': fxbox,
             'xbox': xbox,
             'answer': 'ERR-3       自变量x非实数'
         }
-    return HttpResponse(json.dumps(dict))
+        return HttpResponse(json.dumps(Dict))
 
 
 def matrix(request):
@@ -171,7 +171,7 @@ def changePassword_ajax(request):
         realPassword = obj.password
         if OldPassword != realPassword:
             return HttpResponse('Wrong OldPassword')
-        UserInfo.objects.filter(username = CKusername).update(password=NewPassword)
+        UserInfo.objects.filter(username=CKusername).update(password=NewPassword)
         response = HttpResponse('Success')
         response.delete_cookie('username')
         response.delete_cookie('password')
@@ -180,16 +180,16 @@ def changePassword_ajax(request):
 
 def AddArticle(request):
     currentUsername = getUsername(request)
-    dict = {
+    Dict = {
         'currentUsername': currentUsername,
     }
-    return render(request, 'AddArticle.html', dict)
+    return render(request, 'AddArticle.html', Dict)
 
 
 @csrf_exempt
 def AddArticle_ajax(request):
     currentUsername = getUsername(request)
-    if(currentUsername == -1):
+    if currentUsername == -1:
         return HttpResponse('Please Login')
     title = request.POST['title']
     content = request.POST['content']
@@ -204,18 +204,32 @@ def AddArticle_ajax(request):
 def MyArticle(request):
     currentUsername = getUsername(request)
     ArticleList = ArticleInfo.objects.filter(username=currentUsername)
-    dict = {
+    Dict = {
         'currentUsername': currentUsername,
         'ArticleList': ArticleList,
     }
-    return render(request, 'MyArticle.html', dict)
+    return render(request, 'MyArticle.html', Dict)
 
 
 @csrf_exempt
 def DeleteArticle_ajax(request):
+    currentUsername = getUsername(request)
+    if currentUsername == -1:
+        return HttpResponse('Please Login')
     PostTime = request.POST['PostTime']
     seed = request.POST['seed']
     ArticleInfo.objects.filter(PostTime=PostTime, seed=seed).delete()
     return HttpResponse('Successfully Deleted')
 
+
+def ViewArticle(request):
+    currentUsername = getUsername(request)
+    PostTime = request.GET['PostTime']
+    seed = request.GET['seed']
+    article = ArticleInfo.objects.filter(PostTime=PostTime, seed=seed).first()
+    Dict = {
+        'currentUsername': currentUsername,
+        'article': article,
+    }
+    return render(request, 'ViewArticle.html', Dict)
 

@@ -25,6 +25,7 @@ urlpatterns = [
     path('function/', views.function),
     path('matrix/', views.matrix),
     path('function/ajax/', views.function_ajax),
+    path('BingPic/', views.BingPic),
 
     path('login/', views.login),
     path('login/ajax/', views.login_ajax),
@@ -44,4 +45,6 @@ urlpatterns = [
     path('MyArticle/', views.MyArticle),
 
     path('MyArticle/DeleteArticle/ajax/', views.DeleteArticle_ajax),
+
+    path('ViewArticle/', views.ViewArticle),
 ]
