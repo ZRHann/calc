@@ -47,4 +47,7 @@ urlpatterns = [
     path('MyArticle/DeleteArticle/ajax/', views.DeleteArticle_ajax),
 
     path('ViewArticle/', views.ViewArticle),
+
+    path('games/test1/', views.games_test1),
+    path('games/', views.games),
 ]

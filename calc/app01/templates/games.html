@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}游戏{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+    <dev class="container">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">test1</h5>
+                    <a href="/games/test1/" class="btn btn-primary">test1</a>
+                </div>
+            </div>
+        </div>
+    </dev>
+
+    <script>
+        document.querySelector('#navGames').classList.add('active');
+    </script>
+
+{% endblock %}

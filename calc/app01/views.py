@@ -233,3 +233,20 @@ def ViewArticle(request):
     }
     return render(request, 'ViewArticle.html', Dict)
 
+
+def games_test1(request):
+    currentUsername = getUsername(request)
+    Dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'test1/index.html', Dict)
+
+
+def games(request):
+    currentUsername = getUsername(request)
+    Dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'games.html', Dict)
+
+
