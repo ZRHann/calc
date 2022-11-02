@@ -21,7 +21,6 @@ urlpatterns = [
     path('', views.empty),
     path('index/', views.index),
     path('yyec_equations/', views.yyec_equations),
-    path('jingChess/', views.jingChess),
     path('function/', views.function),
     path('matrix/', views.matrix),
     path('function/ajax/', views.function_ajax),
@@ -50,4 +49,5 @@ urlpatterns = [
 
     path('games/test1/', views.games_test1),
     path('games/', views.games),
+    path('games/jingChess/', views.games_jingChess),
 ]

@@ -71,7 +71,7 @@ def yyec_equations(request):
     return render(request, 'yyec_equations.html', {'currentUsername': currentUsername})
 
 
-def jingChess(request):
+def games_jingChess(request):
     currentUsername = getUsername(request)
     return render(request, 'jingChess.html', {'currentUsername': currentUsername})
 

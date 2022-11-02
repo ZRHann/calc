@@ -7,18 +7,26 @@
 
 {% block content %}
 
-
-    <dev class="container">
-        <div class="col-lg-8 offset-lg-2">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">test1</h5>
-                    <a href="/games/test1/" class="btn btn-primary">test1</a>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-3 mx-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">test1</h5>
+                        <a href="/games/test1/" class="btn btn-primary">开始游戏</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mx-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">井字棋</h5>
+                        <a href="/games/jingChess/" class="btn btn-primary">开始游戏</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </dev>
-
+    </div>
     <script>
         document.querySelector('#navGames').classList.add('active');
     </script>
