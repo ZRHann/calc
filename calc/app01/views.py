@@ -256,3 +256,13 @@ def games_csgov01(request):
         'currentUsername': currentUsername,
     }
     return render(request, 'csgov01/index.html', Dict)
+
+
+def games_csgov02(request):
+    currentUsername = getUsername(request)
+    Dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'csgov02/index.html', Dict)
+
+

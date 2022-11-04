@@ -51,4 +51,5 @@ urlpatterns = [
     path('games/', views.games),
     path('games/jingChess/', views.games_jingChess),
     path('games/csgov01/', views.games_csgov01),
+    path('games/csgov02/', views.games_csgov02),
 ]
