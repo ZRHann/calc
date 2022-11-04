@@ -266,3 +266,10 @@ def games_csgov02(request):
     return render(request, 'csgov02/index.html', Dict)
 
 
+def games_csgov03(request):
+    currentUsername = getUsername(request)
+    Dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'csgov03/index.html', Dict)
+
