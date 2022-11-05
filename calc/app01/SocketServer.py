@@ -1,13 +1,22 @@
+#!/usr/bin/env python
+
 import asyncio
+
 import websockets
 
 
-async def echo(websocket, path):
+async def handler(websocket):
     async for message in websocket:
-        message = "I got your message: {}".format(message)
-        print(message)
-        await websocket.send(message)
+        print("收到信息："+message)
+    async for i in range(0, 100):
+        websocket.send(str(i))
 
 
-asyncio.get_event_loop().run_until_complete(websockets.serve(echo, '172.31.0.132', 9999))
-asyncio.get_event_loop().run_forever()
+
+async def main():
+    async with websockets.serve(handler, "", 8001):
+        await asyncio.Future()  # run forever
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
