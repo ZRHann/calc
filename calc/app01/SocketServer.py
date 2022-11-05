@@ -24,7 +24,7 @@ def link_handler(link, client):
     link.close()
 
 
-ip_port = ('127.0.0.1', 9999)
+ip_port = ('172.31.0.132', 9999)
 sk = socket.socket()            # 创建套接字
 sk.bind(ip_port)                # 绑定服务地址
 sk.listen(5)                    # 监听连接请求
