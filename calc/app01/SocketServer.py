@@ -6,27 +6,22 @@ import time
 import websockets
 
 
-async def msgSender(websocket):
-    for i in range(0, 100):
-        print("sended "+str(i))
-        websocket.send(str(i))
-        time.sleep(1)
 
 
-
-
+async def msgSender(websocket, msg):
+    await websocket.send(msg)
 
 
 async def handler(websocket):
-    asyncio.run(msgSender())
-    async for message in websocket:
-        print("收到信息："+message)
-
+    while True:
+        message = await websocket.recv()
+        print("收到："+message)
+        await msgSender(websocket, "hi")
 
 
 
 async def main():
-    async with websockets.serve(handler, "172.31.0.132", 9999):
+    async with websockets.serve(handler, "172.24.47.192", 9999):
         await asyncio.Future()  # run forever
 
 
