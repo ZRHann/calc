@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}实时聊天室{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <label>实时消息</label>
+                <div id="MessageBox"
+                     class="px-3 py-1"
+                ></div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">发送消息</label>
+                    <textarea class="form-control"
+                              id="SendMessageArea"
+                              style="height: 495px; resize: none;"
+                              contenteditable="true"
+                    ></textarea>
+                </div>
+                <button class="btn btn-dark" id="SendBTN" disabled>发送</button>
+                <button class="btn btn-dark ml-2" id="ConnectBTN">连接</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="ErrorModal">
+        <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ErrorModalH5"></h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#navChattingRoom').classList.add('active');
+        let MessageBox = document.querySelector("#MessageBox");
+        let SendMessageArea = document.querySelector("#SendMessageArea");
+        let currentUsername = '{{ currentUsername }}';
+        let socket;
+
+
+        $("#SendBTN").click(
+            function () {
+                msg = {
+                    "type": "send",
+                    "username": currentUsername,
+                    "content": SendMessageArea.value,
+                }
+                socket.send(JSON.stringify(msg))
+            }
+        )
+
+
+        $("#ConnectBTN").click(
+            function () {
+                socket = new WebSocket("ws://zrhan.cf:9999");
+
+                socket.onopen = function (e) {
+                    {#alert("[open] Connection established. Sending to server the LOGIN message");#}
+                    msg = {
+                        "type": "login",
+                        "username": '{{ currentUsername }}',
+                        "content": ''
+                    }
+                    socket.send(JSON.stringify(msg));
+                    $('#SendBTN').attr("disabled", false);
+                };
+
+
+                socket.onmessage = function (event) {
+                    let data = JSON.parse(event.data);
+                    let username = data['username'];
+                    let content = data['content'];
+                    let addStr = '';
+                    if (data['type'] === "login") {
+                        addStr = "<p><span style='color: red'>系统消息</span>：" + "<span style='color: blue'>" + username + "</span>" + '加入了聊天室' + "</p>";
+                    } else if (data['type'] === "logout") {
+                        addStr = "<p><span style='color: red'>系统消息</span>：" + "<span style='color: blue'>" + username + "</span>" + '离开了聊天室' + "</p>";
+                    } else if (data["type"] === "send") {
+                        addStr = "<p><span style='color: blue;'>" + username + "</span>：" + "<span>" + content + "</span></p>"
+                    }
+                    $('#MessageBox').html($('#MessageBox').html() + addStr);
+                };
+                socket.onclose = function (event) {
+                    if (event.wasClean) {
+                        {#alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);#}
+                    } else {
+                        // 例如服务器进程被杀死或网络中断
+                        // 在这种情况下，event.code 通常为 1006
+                        {#alert('[close] Connection died');#}
+                    }
+                };
+                socket.onerror = function (error) {
+                    {#alert(`[error] ${error.message}`);#}
+                };
+            }
+        )
+        window.onbeforeunload = function () {
+            msg = {
+                "type": "logout",
+                "username": '{{ currentUsername }}',
+                "content": ''
+            }
+            socket.send(JSON.stringify(msg));
+            socket.close();
+        }
+    </script>
+    <style>
+        #MessageBox {
+            padding: 40px;
+            border-radius: 3px;
+            box-shadow: 0 0 0 1px rgb(206, 212, 218);
+            width: 100%;
+            height: 550px;
+            overflow: auto;
+        }
+    </style>
+{% endblock %}
+

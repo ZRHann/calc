@@ -10,10 +10,9 @@ from app01.models import ArticleInfo
 import time
 import string
 from app01.tools import GetBeijingTime
-
-
-
 # 传入request，判断是否有已登录的Cookie
+
+
 def getUsername(request):
     CKusername = request.COOKIES.get('username')
     CKpassword = request.COOKIES.get('password')
@@ -283,3 +282,10 @@ def games_csgov04(request):
     }
     return render(request, 'csgov04/index.html', Dict)
 
+
+def ChattingRoom(request):
+    currentUsername = getUsername(request)
+    Dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'ChattingRoom.html', Dict)
