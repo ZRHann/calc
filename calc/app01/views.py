@@ -3,12 +3,14 @@ from django.shortcuts import render, redirect, HttpResponse
 import requests
 import random
 import json
-from app01 import mathrepl
+from app01.tools import mathrepl
 from django.views.decorators.csrf import csrf_exempt
 from app01.models import UserInfo
 from app01.models import ArticleInfo
 import time
 import string
+from app01.tools import GetBeijingTime
+
 
 
 # 传入request，判断是否有已登录的Cookie
@@ -193,7 +195,7 @@ def AddArticle_ajax(request):
         return HttpResponse('Please Login')
     title = request.POST['title']
     content = request.POST['content']
-    PostTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    PostTime = time.strftime('%Y-%m-%d %H:%M:%S', GetBeijingTime.getBeijingTime())
     seed = ''.join(random.sample(string.ascii_letters + string.digits, 32))
     # print(seed)
     username = currentUsername
