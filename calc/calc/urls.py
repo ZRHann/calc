@@ -56,4 +56,5 @@ urlpatterns = [
     path('games/csgov04/', views.games_csgov04),
 
     path('ChattingRoom/', views.ChattingRoom),
+    path('planet/', views.planet),
 ]

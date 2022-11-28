@@ -289,3 +289,11 @@ def ChattingRoom(request):
         'currentUsername': currentUsername,
     }
     return render(request, 'ChattingRoom.html', Dict)
+
+
+def planet(request):
+    currentUsername = getUsername(request)
+    Dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'planet.html', Dict)

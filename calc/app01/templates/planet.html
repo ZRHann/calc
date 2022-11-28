@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}PLANET{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <canvas id="canvas" width="1100px" height="600px">
+
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.querySelector('#navPlanet').classList.add('active');
+        let canvas = document.querySelector('#canvas');
+        BallList = [];
+        let ctx = canvas.getContext('2d');
+        let G = 10.0;
+        let eps = 2.0;
+
+        class Ball {
+            constructor(x, y, vx, vy, m, color, radius) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.ax = 0.0;
+                this.ay = 0.0;
+                this.m = m;
+                this.color = color;
+                this.radius = radius;
+                this.onWdown = false;
+                this.onAdown = false;
+                this.onSdown = false;
+                this.onDdown = false;
+                BallList.push(this)
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+
+        }
+
+        function drawAnim()
+        {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            BallList.forEach((b1, i) => {
+                b1.ax = b1.ay = 0;
+                if(b1.onWdown) {
+                    b1.ay += -0.01;
+                    console.log(b1.ay);
+                }
+                if(b1.onAdown) {
+                    b1.ax += -0.01;
+                    console.log(b1.ax);
+                }
+                if(b1.onSdown) {
+                    b1.ay += 0.01;
+                }
+                if(b1.onDdown) {
+                    b1.ax += 0.01;
+                }
+
+                BallList.forEach((b2, i) => {
+                    if (b1 === b2) {
+                        return;
+                    }
+
+                    {#console.log('b1');#}
+                    {#console.log(b1);#}
+                    {#console.log('b2');#}
+                    {#console.log(b2);#}
+                    {#console.log('--------------');#}
+                    let dis2 = (b2.x - b1.x) * (b2.x - b1.x) + (b2.y - b1.y) * (b2.y - b1.y);
+                    if(dis2 < (b1.radius+b2.radius)*(b1.radius+b2.radius)) {
+                        b1.vx = b1.vy = b1.ax = b1.ay = 0;
+                        return;
+                    }
+                    let axy = G *  b2.m / dis2;
+                    let directionVector = {
+                        x: 0,
+                        y: 0,
+                    };
+                    directionVector.x = (b2.x - b1.x) / Math.sqrt(dis2);
+                    directionVector.y = (b2.y - b1.y) / Math.sqrt(dis2);
+
+                    b1.ax += axy * directionVector.x;
+                    b1.ay += axy * directionVector.y;
+                })
+                b1.vx += b1.ax;
+                b1.vy += b1.ay;
+                b1.x += b1.vx;
+                b1.y += b1.vy;
+
+                b1.draw();
+
+                {#   将drawAnim的this绑定为当前对象。否则this.x会报错undefined  #}
+            });
+            window.requestAnimationFrame(drawAnim);
+        }
+
+
+        function AddKeyListener() {
+            $(document).keydown(
+                function (e) {
+                    switch (e.keyCode) {
+                        {# W #}
+                        case 87: {
+                            {#console.log('w');#}
+                            playerBall.onWdown = true;
+                            break;
+                        }
+                        {# A #}
+                        case 65: {
+                            playerBall.onAdown = true;
+                            break;
+                        }
+                        {# S #}
+                        case 83: {
+                            playerBall.onSdown = true;
+                            break;
+                        }
+                        {# D #}
+                        case 68: {
+                            playerBall.onDdown = true;
+                            break;
+                        }
+                    }
+                }
+            )
+
+            $(document).keyup(
+                function (e) {
+                    switch (e.keyCode) {
+                        {# W #}
+                        case 87: {
+                            {#console.log('w');#}
+                            playerBall.onWdown = false;
+                            break;
+                        }
+                        {# A #}
+                        case 65: {
+                            playerBall.onAdown = false;
+                            break;
+                        }
+                        {# S #}
+                        case 83: {
+                            playerBall.onSdown = false;
+                            break;
+                        }
+                        {# D #}
+                        case 68: {
+                            playerBall.onDdown = false;
+                            break;
+                        }
+                    }
+                }
+            )
+        }
+
+        function main() {
+            playerBall = new Ball(300.0, 250, 0, 0.1, 100, 'blue', 25);
+            let ball2 = new Ball(500.0, 250, 0, 2, 1, 'green', 25);
+            AddKeyListener();
+            drawAnim();
+            {#window.requestAnimationFrame(ball.drawAnim);#}
+        }
+
+        main();
+    </script>
+
+    <style type="text/css">
+        #canvas {
+            border: 1px solid gray;
+            margin-top: 30px
+        }
+    </style>
+{% endblock %}
