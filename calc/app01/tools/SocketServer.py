@@ -47,6 +47,7 @@ async def handler(websocket):
 
 async def main():
     async with websockets.serve(handler, "172.31.0.132", 9999):
+        print("服务端已启动")
         await asyncio.Future()  # run forever
 
 
