@@ -51,6 +51,9 @@
         let socket;
 
 
+
+
+
         $("#SendBTN").click(
             function () {
                 msg = {
@@ -65,7 +68,12 @@
 
         $("#ConnectBTN").click(
             function () {
-                socket = new WebSocket("ws://zrhan.cf:9999");
+                if (currentUsername == "-1") {
+                    $('#ErrorModalH5').text("请先登录");
+                    $('#ErrorModal').modal();
+                    return;
+                }
+                socket = new WebSocket("ws://117.68.108.158:9999");
 
                 socket.onopen = function (e) {
                     {#alert("[open] Connection established. Sending to server the LOGIN message");#}
