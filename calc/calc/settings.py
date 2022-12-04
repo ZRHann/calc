@@ -24,7 +24,7 @@ SECRET_KEY = 'l^w=uwm-ec(g1-%@eqnopgmvoov*a%b%49xjq9_lkn3s)u2rra'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['117.68.108.158', 'zrhan.cf', '127.0.0.1' ]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
