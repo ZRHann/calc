@@ -194,7 +194,7 @@ def AddArticle_ajax(request):
         return HttpResponse('Please Login')
     title = request.POST['title']
     content = request.POST['content']
-    PostTime = time.strftime('%Y-%m-%d %H:%M:%S', GetBeijingTime.getBeijingTime())
+    PostTime = GetBeijingTime.getBeijingTime()
     seed = ''.join(random.sample(string.ascii_letters + string.digits, 32))
     # print(seed)
     username = currentUsername
