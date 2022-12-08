@@ -9,3 +9,15 @@ DevTools listening on ws://127.0.0.1:61052/devtools/browser/97223050-b10c-47e5-a
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
 1670496831760	Marionette	INFO	Stopped listening on port 61067
 console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670496915177	geckodriver	INFO	Listening on 127.0.0.1:61773
+1670496919178	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "61774" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile0xrKnG"
+1670496919426	Marionette	INFO	Marionette enabled
+1670496919431	Marionette	INFO	Listening on port 61787
+WebDriver BiDi listening on ws://127.0.0.1:61774
+Read port: 61787
+1670496919632	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:61774/devtools/browser/efc7c6b2-d5c0-4e19-a5b0-e1c11cadac7b
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670496925097	Marionette	INFO	Stopped listening on port 61787
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
