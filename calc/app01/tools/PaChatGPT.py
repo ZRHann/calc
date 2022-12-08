@@ -1,3 +1,6 @@
+import os
+os.chdir('../../')
+print('当前工作目录', os.getcwd())
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -8,7 +11,7 @@ import time
 
 option = webdriver.FirefoxOptions()
 
-profile_dir = calc.settings.BASE_DIR + r'/app01/MyData/a2s3528m.default-release'
+profile_dir = r'./app01/MyData/a2s3528m.default-release'
 conf_profile = webdriver.FirefoxProfile(profile_dir)
 driver = webdriver.Firefox(conf_profile)
 driver.get("https://chat.openai.com/")

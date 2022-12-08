@@ -1,0 +1,11 @@
+1670496822848	geckodriver	INFO	Listening on 127.0.0.1:61051
+1670496826877	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "61052" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileZILQOH"
+1670496827145	Marionette	INFO	Marionette enabled
+1670496827149	Marionette	INFO	Listening on port 61067
+WebDriver BiDi listening on ws://127.0.0.1:61052
+Read port: 61067
+1670496827340	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:61052/devtools/browser/97223050-b10c-47e5-a4ee-2be8cfd92bce
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670496831760	Marionette	INFO	Stopped listening on port 61067
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
