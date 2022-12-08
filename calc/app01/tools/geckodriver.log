@@ -1,0 +1,294 @@
+1670484262595	geckodriver	INFO	Listening on 127.0.0.1:57631
+1670484265661	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "user-data-dir=C:\\Users\\ZRHan\\Desktop\\temp\\a2s3528m.default-release" "--remote-debugging-port" "57632" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilezyzXTO"
+1670484265922	Marionette	INFO	Marionette enabled
+1670484265926	Marionette	INFO	Listening on port 57650
+WebDriver BiDi listening on ws://127.0.0.1:57632
+Read port: 57650
+1670484266112	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilezyzXTO\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:57632/devtools/browser/70700924-fa6c-4954-af56-edbc343bc110
+1670484276524	Marionette	INFO	Stopped listening on port 57650
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670484523556	geckodriver	INFO	Listening on 127.0.0.1:58771
+1670484526633	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "user-data-dir=C:\\Users\\ZRHan\\Desktop\\temp\\a2s3528m.default-release" "--remote-debugging-port" "58772" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile0UCajR"
+1670484526892	Marionette	INFO	Marionette enabled
+1670484526896	Marionette	INFO	Listening on port 58786
+WebDriver BiDi listening on ws://127.0.0.1:58772
+Read port: 58786
+1670484527072	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile0UCajR\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58772/devtools/browser/05c5f090-33ae-4938-b570-9428026d9e37
+1670484531188	Marionette	INFO	Stopped listening on port 58786
+1670484549240	geckodriver	INFO	Listening on 127.0.0.1:58971
+1670484552314	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "user-data-dir=C:\\Users\\ZRHan\\Desktop\\temp\\a2s3528m.default-release" "--remote-debugging-port" "58972" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile5R4oW4"
+1670484552572	Marionette	INFO	Marionette enabled
+1670484552576	Marionette	INFO	Listening on port 58985
+WebDriver BiDi listening on ws://127.0.0.1:58972
+Read port: 58985
+1670484552755	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile5R4oW4\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58972/devtools/browser/fd7c2b06-9a23-4815-b8d8-1e8d4e3f4a11
+1670484569473	Marionette	INFO	Stopped listening on port 58985
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670484809405	geckodriver	INFO	Listening on 127.0.0.1:60541
+1670484812465	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "user-data-dir=C:\\Users\\ZRHan\\Desktop\\temp\\a2s3528m.default-release" "--remote-debugging-port" "60542" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileoKcf1m"
+1670484812723	Marionette	INFO	Marionette enabled
+1670484812728	Marionette	INFO	Listening on port 60565
+WebDriver BiDi listening on ws://127.0.0.1:60542
+Read port: 60565
+1670484812903	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileoKcf1m\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:60542/devtools/browser/7623b48a-9295-4a51-a34f-1758267c7001
+1670484849713	Marionette	INFO	Stopped listening on port 60565
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670484852339	geckodriver	INFO	Listening on 127.0.0.1:60868
+1670484855425	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "user-data-dir=C:\\Users\\ZRHan\\Desktop\\temp\\a2s3528m.default-release" "--remote-debugging-port" "60869" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilevmwpX2"
+1670484855676	Marionette	INFO	Marionette enabled
+1670484855680	Marionette	INFO	Listening on port 60879
+WebDriver BiDi listening on ws://127.0.0.1:60869
+Read port: 60879
+1670484855859	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilevmwpX2\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:60869/devtools/browser/ff4e1275-bdff-4d76-9399-52d39266afb0
+1670484885231	Marionette	INFO	Stopped listening on port 60879
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+er-data-dir=C:\\Users\\ZRHan\\Desktop\\temp\\a2s3528m.default-release" "--remote-debugging-port" "61338" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileQvrCmh"
+1670484873613	Marionette	INFO	Marionette enabled
+1670484873617	Marionette	INFO	Listening on port 61347
+Read port: 61347
+WebDriver BiDi listening on ws://127.0.0.1:61338
+1670484873710	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileQvrCmh\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61338/devtools/browser/8bb02344-2731-4f95-bf77-9dcd259a9822
+1670484887033	Marionette	INFO	Stopped listening on port 61347
+JavaScript error: resource://gre/modules/UrlClassifierListManager.jsm, line 693: TypeError: this.tablesData[table] is undefined
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670484984992	geckodriver	INFO	Listening on 127.0.0.1:62256
+1670484988036	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "user-data-dir=C:\\Users\\ZRHan\\Desktop\\temp\\a2s3528m.default-release" "--remote-debugging-port" "62257" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileRd2A3x"
+1670484988293	Marionette	INFO	Marionette enabled
+1670484988297	Marionette	INFO	Listening on port 62276
+WebDriver BiDi listening on ws://127.0.0.1:62257
+Read port: 62276
+1670484988476	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileRd2A3x\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62257/devtools/browser/e51fe819-91e5-4248-bccc-63040742218e
+JavaScript warning: resource://gre/modules/Troubleshoot.sys.mjs, line 706: WebGL context was lost.
+JavaScript warning: resource://gre/modules/Troubleshoot.sys.mjs, line 706: WebGL context was lost.
+1670487276178	Marionette	INFO	Stopped listening on port 62276
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "65141" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilekW49tk"
+1670485436793	Marionette	INFO	Marionette enabled
+1670485436797	Marionette	INFO	Listening on port 65153
+WebDriver BiDi listening on ws://127.0.0.1:65141
+Read port: 65153
+1670485436988	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:65141/devtools/browser/c189f408-cf5a-4334-bcf8-09cc3a8cddb0
+1670485444631	Marionette	INFO	Stopped listening on port 65153
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670487078434	geckodriver	INFO	Listening on 127.0.0.1:51056
+1670487082398	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51057" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileJkbELD"
+1670487082638	Marionette	INFO	Marionette enabled
+1670487082643	Marionette	INFO	Listening on port 51066
+WebDriver BiDi listening on ws://127.0.0.1:51057
+Read port: 51066
+1670487082886	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51057/devtools/browser/94648fb4-cb3d-42f8-bb85-4e01a37f2347
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 574: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1670487278421	Marionette	INFO	Stopped listening on port 51066
+e-debugging-port" "51829" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileOrsYJY"
+1670487261715	Marionette	INFO	Marionette enabled
+1670487261720	Marionette	INFO	Listening on port 51840
+Read port: 51840
+WebDriver BiDi listening on ws://127.0.0.1:51829
+1670487261776	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: Failed to load a program object with a program binary: gpu_cache_update renderer ANGLE (AMD, AMD Radeon(TM) Graphics Direct3D11 vs_5_0 ps_5_0, D3D11-30.0.13040.13)
+
+[2022-12-08T08:14:22Z ERROR webrender::device::gl] Failed to load a program object with a program binary: gpu_cache_update renderer ANGLE (AMD, AMD Radeon(TM) Graphics Direct3D11 vs_5_0 ps_5_0, D3D11-30.0.13040.13)
+    
+[GFX1-]: shader-cache: Failed program_binary
+[2022-12-08T08:14:22Z ERROR webrender_bindings::program_cache] shader-cache: Failed program_binary
+[GFX1-]: Failed to compile vertex shader: gpu_cache_update
+
+[2022-12-08T08:14:22Z ERROR webrender::device::gl] Failed to compile vertex shader: gpu_cache_update
+    
+[GFX1-]: wr_window_new: Shader(Compilation("gpu_cache_update", ""))
+[GFX1-]: Failed to connect WebRenderBridgeChild. isParent=true
+[GFX1-]: Fallback WR to SW-WR + D3D11
+[GFX1-]: [D3D11] CreateInputLayout failed: 0x887a0005
+[GFX1-]: [D3D11] failed to get compositor device attachments
+[GFX1-]: Failed to initialize CompositorD3D11 for SWGL: FEATURE_FAILURE_D3D11_INPUT_LAYOUT
+[Parent 21460, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+out of memory: 0x0000000000100000 bytes requested
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+[GFX1-]: Failed to allocate Texture2D: Size(1024,512)
+[GFX1-]: Handling webrender error 3
+[GFX1-]: Fall[GFX1-]: Failed to allocate Texture2D: Size(1024,512)
+back SW-WR + D3D11 to SW-WR
+[GFX1-]: Failed to allocate Texture2D: Size(1024,512)
+[GFX1-]: Failed to allocate Texture2D: Size(1024,512)
+[GFX1-]: MapTile failed aValidRect: Rect(x=0, y=0, w=1024, h=512)
+[GFX1-]: MapTile failed aValidRect: Rect(x=0, y=0, w=580, h=512)
+[GFX1-]: MapTile failed aValidRect: Rect(x=0, y=0, w=1024, h=456)
+[GFX1-]: MapTile failed aValidRect: Rect(x=0, y=0, w=580, h=456)
+[GFX1-]: wr_renderer_render: OutOfMemory
+[GFX1-]: wr_renderer_render: OutOfMemory
+[GFX1-]: wr_renderer_render: OutOfMemory
+[GFX1-]: wr_renderer_render: OutOfMemory
+[GFX1-]: Handling webrender error 2
+[GFX1-]: Fallback remains SW-WR
+A content process crashed and MOZ_CRASHREPORTER_SHUTDOWN is set, shutting down
+WARNING: A blocker encountered an error while we were waiting.
+          Blocker:  SessionStore: flushing all windows
+          Phase: quit-application-granted
+          State: {"total":-1,"current":-1}
+WARNING: TypeError: mm is null
+WARNING: flush@resource:///modules/sessionstore/TabStateFlusher.jsm:127:7
+flushWindow@resource:///modules/sessionstore/TabStateFlusher.jsm:169:28
+flushWindow@resource:///modules/sessionstore/TabStateFlusher.jsm:38:36
+flushAllWindowsAsync@resource:///modules/sessionstore/SessionStore.jsm:2290:55
+ssi_onQuitApplicationGranted/<@resource:///modules/sessionstore/SessionStore.jsm:2205:32
+trigger@resource://gre/modules/AsyncShutdown.jsm:746:23
+_wait@resource://gre/modules/AsyncShutdown.jsm:898:15
+wait@resource://gre/modules/AsyncShutdown.jsm:879:34
+observe@resource://gre/modules/AsyncShutdown.jsm:556:10
+observe@resource:///modules/ContentCrashHandlers.jsm:177:28
+
+1670487269446	Marionette	INFO	Stopped listening on port 51840
+1670487269450	CDP	WARN	Failed to remove undefined (Could not parse path (undefined): NS_ERROR_FILE_UNRECOGNIZED_PATH)
+[Parent 21460, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+JavaScript error: resource:///modules/sessionstore/TabStateFlusher.jsm, line 127: TypeError: mm is null
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+[2022-12-08T08:14:29Z ERROR viaduct::backend::ffi] Missing HTTP status
+[2022-12-08T08:14:29Z ERROR viaduct::backend::ffi] Missing HTTP status
+1670487293234	geckodriver	INFO	Listening on 127.0.0.1:52123
+1670487297174	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52124" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilekwEkLk"
+1670487297401	Marionette	INFO	Marionette enabled
+1670487297405	Marionette	INFO	Listening on port 52133
+WebDriver BiDi listening on ws://127.0.0.1:52124
+Read port: 52133
+1670487297600	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52124/devtools/browser/1b7716b9-0cbe-4081-bb8f-1c63d5a38394
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 574: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1670487364239	Marionette	INFO	Stopped listening on port 52133
+1670487367835	geckodriver	INFO	Listening on 127.0.0.1:52550
+1670487371782	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52551" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileSjFYmd"
+1670487372008	Marionette	INFO	Marionette enabled
+1670487372012	Marionette	INFO	Listening on port 52560
+WebDriver BiDi listening on ws://127.0.0.1:52551
+Read port: 52560
+1670487372209	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52551/devtools/browser/939e4a77-8cc6-4aa3-9715-14376b36c97c
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileSjFYmd\thumbnails) because it does not exist
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 574: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1670487743104	Marionette	INFO	Stopped listening on port 52560
+1670487745699	geckodriver	INFO	Listening on 127.0.0.1:53239
+1670487749648	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53240" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileoSBIka"
+1670487749872	Marionette	INFO	Marionette enabled
+1670487749876	Marionette	INFO	Listening on port 53249
+WebDriver BiDi listening on ws://127.0.0.1:53240
+Read port: 53249
+1670487750075	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:53240/devtools/browser/67c58852-834b-4f34-b5d4-493d1da6ef2e
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileoSBIka\thumbnails) because it does not exist
+1670487857754	geckodriver	INFO	Listening on 127.0.0.1:53853
+1670487861733	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53854" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile3ai4ld"
+1670487861956	Marionette	INFO	Marionette enabled
+1670487861961	Marionette	INFO	Listening on port 53867
+WebDriver BiDi listening on ws://127.0.0.1:53854
+Read port: 53867
+1670487862148	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:53854/devtools/browser/79176aac-432d-4687-83d4-f2bb374128aa
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofile3ai4ld\thumbnails) because it does not exist
+1670488181079	geckodriver	INFO	Listening on 127.0.0.1:54500
+1670488185065	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54501" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileuN4HRp"
+1670488185300	Marionette	INFO	Marionette enabled
+1670488185304	Marionette	INFO	Listening on port 54515
+WebDriver BiDi listening on ws://127.0.0.1:54501
+Read port: 54515
+1670488185491	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:54501/devtools/browser/48a80e68-d892-4d55-ac36-5f1467969127
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670488209365	geckodriver	INFO	Listening on 127.0.0.1:54662
+1670488213360	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54663" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileYLjq7X"
+1670488213598	Marionette	INFO	Marionette enabled
+1670488213602	Marionette	INFO	Listening on port 54678
+WebDriver BiDi listening on ws://127.0.0.1:54663
+Read port: 54678
+1670488213785	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:54663/devtools/browser/cf73d98b-021d-4022-a6b1-16eb1d00acd1
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670488260509	geckodriver	INFO	Listening on 127.0.0.1:54983
+1670488264459	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54984" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilezY02KK"
+1670488264700	Marionette	INFO	Marionette enabled
+1670488264704	Marionette	INFO	Listening on port 54994
+WebDriver BiDi listening on ws://127.0.0.1:54984
+Read port: 54994
+1670488264897	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:54984/devtools/browser/510307cd-99af-4e6a-a05e-45e0b41acb93
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofilezY02KK\thumbnails) because it does not exist
+1670488813760	Marionette	INFO	Stopped listening on port 54994
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "55770" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileDWFyZE"
+1670488763334	Marionette	INFO	Marionette enabled
+1670488763339	Marionette	INFO	Listening on port 55781
+WebDriver BiDi listening on ws://127.0.0.1:55770
+Read port: 55781
+1670488763525	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:55770/devtools/browser/fdc50170-8b00-4ad3-9c06-316fb6bf9a05
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileDWFyZE\thumbnails) because it does not exist
+1670488812213	Marionette	INFO	Stopped listening on port 55781
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+remote-debugging-port" "56494" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile5rHm1s"
+1670488808983	Marionette	INFO	Marionette enabled
+1670488808987	Marionette	INFO	Listening on port 56516
+WebDriver BiDi listening on ws://127.0.0.1:56494
+Read port: 56516
+1670488809217	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:56494/devtools/browser/2c9549cb-965a-4531-b935-326d4fe5edc1
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670488830702	geckodriver	INFO	Listening on 127.0.0.1:56930
+1670488834692	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56931" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileosk1li"
+1670488834921	Marionette	INFO	Marionette enabled
+1670488834925	Marionette	INFO	Listening on port 56940
+WebDriver BiDi listening on ws://127.0.0.1:56931
+Read port: 56940
+1670488835112	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:56931/devtools/browser/168724fc-255d-4876-a8b9-3020fa125aa0
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670488862808	geckodriver	INFO	Listening on 127.0.0.1:57484
+1670488866760	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "57485" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilefBEBGp"
+1670488866992	Marionette	INFO	Marionette enabled
+1670488866996	Marionette	INFO	Listening on port 57494
+WebDriver BiDi listening on ws://127.0.0.1:57485
+Read port: 57494
+1670488867192	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:57485/devtools/browser/5f0c4aed-968b-4185-a98c-444da2073c44
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofilefBEBGp\thumbnails) because it does not exist
+1670488965258	geckodriver	INFO	Listening on 127.0.0.1:58056
+1670488969202	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58057" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile7E22l1"
+1670488969443	Marionette	INFO	Marionette enabled
+1670488969448	Marionette	INFO	Listening on port 58197
+WebDriver BiDi listening on ws://127.0.0.1:58057
+Read port: 58197
+1670488969639	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:58057/devtools/browser/541a3238-1c3d-4566-97f0-69dc942a70db
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofile7E22l1\thumbnails) because it does not exist
+1670489326182	Marionette	INFO	Stopped listening on port 58197
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670489338551	geckodriver	INFO	Listening on 127.0.0.1:60388
+1670489342512	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "60389" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileP3ay8M"
+1670489342741	Marionette	INFO	Marionette enabled
+1670489342745	Marionette	INFO	Listening on port 60538
+WebDriver BiDi listening on ws://127.0.0.1:60389
+Read port: 60538
+1670489342931	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:60389/devtools/browser/0526b8e8-7501-4cdd-a16b-ca1e7df296d7
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."

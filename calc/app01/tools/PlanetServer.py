@@ -7,6 +7,35 @@ import websockets
 import json
 
 USERS = {}
+'''
+{
+    "user1": {
+        "websocket": ws, 
+        "ball": ball, 
+    }
+    
+    "user2": {
+        "websocket": ws, 
+        "ball": ball, 
+    }
+}
+'''
+
+class Ball:
+    def __init__(self):
+        self.x = 0.0
+        self.y = 0.0
+        self.vx = 0.0
+        self.vy = 0.0
+        self.ax = 0.0
+        self.ay = 0.0
+        self.m = 1.0
+        self.color = 0
+        self.radius = 20.0
+        self.onWdown = False
+        self.onAdown = False
+        self.onSdown = False
+        self.onDdown = False
 
 
 async def board(msg):
@@ -19,9 +48,10 @@ async def handler(websocket):
     async for message in websocket:
         print("接收到" + str(message))
         data = json.loads(message)
-        if data["type"] == "login":
+        if data["type"] == "AddBall":
             # 给他每一个球的状态, 广播他的状态
-            USERS[data["username"]] = websocket
+            USERS[data["username"]] = {}
+            USERS[data["username"]]["websocket"] = websocket
             msg = {
                 "type": "AddBall",
                 "username": data["username"],
