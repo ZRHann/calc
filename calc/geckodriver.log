@@ -21,3 +21,21 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
 1670496925097	Marionette	INFO	Stopped listening on port 61787
 console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1670498613099	geckodriver	INFO	Listening on 127.0.0.1:64971
+1670498617068	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64972" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofileSwprnV"
+1670498617333	Marionette	INFO	Marionette enabled
+1670498617337	Marionette	INFO	Listening on port 64981
+WebDriver BiDi listening on ws://127.0.0.1:64972
+Read port: 64981
+1670498617598	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:64972/devtools/browser/2a14a66e-b16b-4870-b157-ca81d38c3943
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670498633352	geckodriver	INFO	Listening on 127.0.0.1:65389
+1670498637310	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "65519" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofilefqvfW6"
+1670498637559	Marionette	INFO	Marionette enabled
+1670498637563	Marionette	INFO	Listening on port 49159
+WebDriver BiDi listening on ws://127.0.0.1:65519
+Read port: 49159
+1670498637755	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:65519/devtools/browser/3cbd131e-94a7-49bb-b5f1-a39fb3339fbb
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."

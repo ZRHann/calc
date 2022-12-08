@@ -294,8 +294,8 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
 JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileP3ay8M\thumbnails) because it does not exist
 JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileP3ay8M\thumbnails) because it does not exist
-1670495794620	geckodriver	INFO	Listening on 127.0.0.1:58481
-1670495798627	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58482" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile2AnaUG"
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileP3ay8M\thumbnails) because it does not exist
+" "58482" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ZRHan\\AppData\\Local\\Temp\\rust_mozprofile2AnaUG"
 1670495798871	Marionette	INFO	Marionette enabled
 1670495798876	Marionette	INFO	Listening on port 58491
 WebDriver BiDi listening on ws://127.0.0.1:58482

@@ -14,7 +14,7 @@ profile_dir = r'./app01/MyData/a2s3528m.default-release'
 conf_profile = webdriver.FirefoxProfile(profile_dir)
 driver = webdriver.Firefox(conf_profile)
 driver.get("https://chat.openai.com/")
-
+print(driver.page_source)
 
 WebDriverWait(driver, 1000).until(
     EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div[1]/main/div[2]/form/div/div[2]/button'))
