@@ -1,3 +1,3 @@
-2022/12/08-23:18:39.957 4d08 Reusing MANIFEST C:\Users\ZRHan\Desktop\temp\data1\Default\Local Storage\leveldb/MANIFEST-000001
-2022/12/08-23:18:39.957 4d08 Recovering log #3
-2022/12/08-23:18:39.958 4d08 Reusing old log C:\Users\ZRHan\Desktop\temp\data1\Default\Local Storage\leveldb/000003.log 
+2022/12/09-00:06:19.637 1234 Reusing MANIFEST D:\zrh\calculate\calc/app01/tools/PaChatGPT/userdata/data1\Default\Local Storage\leveldb/MANIFEST-000001
+2022/12/09-00:06:19.638 1234 Recovering log #3
+2022/12/09-00:06:19.638 1234 Reusing old log D:\zrh\calculate\calc/app01/tools/PaChatGPT/userdata/data1\Default\Local Storage\leveldb/000003.log 
