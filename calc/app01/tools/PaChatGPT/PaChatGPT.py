@@ -20,6 +20,7 @@ chrome_options.add_argument('--disable-browser-side-navigation')
 chrome_options.add_argument('enable-automation')
 chrome_options.add_argument('--disable-infobars')
 chrome_options.add_argument('enable-features=NetworkServiceInProcess')
+chrome_options.add_argument(f'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36')
 driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://chat.openai.com/chat")
 
@@ -40,7 +41,7 @@ textarea2 = driver.find_element('xpath', '/html/body/main/section/div/div/div/fo
 btn4 = driver.find_element('xpath', '/html/body/main/section/div/div/div/form/div[2]/button')
 textarea2.send_keys("2829442630@qq.com")
 btn4.click()
-
+print("email entered, btn4 clicked")
 
 WebDriverWait(driver, 1000).until(
     EC.element_to_be_clickable((By.XPATH, '//*[@id="password"]'))
@@ -49,12 +50,15 @@ textarea3 = driver.find_element('xpath', '//*[@id="password"]')
 btn3 = driver.find_element('xpath', '/html/body/main/section/div/div/div/form/div[2]/button')
 textarea3.send_keys("zg801zrh160118.")
 btn3.click()
+print("password entered, btn3 clicked")
+
 
 WebDriverWait(driver, 1000).until(
     EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div/div/div[2]/div/div/div[2]/div[4]/button'))
 )
 btn5 = driver.find_element('xpath', '/html/body/div[2]/div/div/div/div[2]/div/div/div[2]/div[4]/button')
 btn5.click()
+
 
 WebDriverWait(driver, 1000).until(
     EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div/div/div/div[2]/div/div/div[2]/div[4]/button[2]'))
@@ -87,13 +91,6 @@ def SendAndReceive(msg):
     )
     BotAnswerP = driver.find_elements("xpath", '/html//p')[-2]
     print(BotAnswerP.text)
-
-
-def GetLoginCookie():
-    cookie = ""
-    with open('cookies.txt', 'r') as f:
-        cookie = f.read()
-    print(cookie)
 
 
 SendAndReceive("3543")
