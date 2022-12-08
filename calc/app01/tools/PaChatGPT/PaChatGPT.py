@@ -11,7 +11,7 @@ import json
 import time
 
 CookieList = []
-with open('app01/tools/PaChatGPT/cookies.txt', 'r') as f:
+with open('./app01/tools/PaChatGPT/cookies.txt', 'r') as f:
     CookieList = json.loads(f.read())
 print(CookieList)
 chrome_options = webdriver.ChromeOptions()
