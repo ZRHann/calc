@@ -1,0 +1,6 @@
+{"timestamp":0,"category":"nimbus_events","name":"validation_failed","extra":{"experiment":"nimbus-pref-qa-1-4week-experiment","feature":"nimbus-qa-1","reason":"invalid-feature"}}
+{"timestamp":0,"category":"nimbus_events","name":"validation_failed","extra":{"reason":"invalid-feature","experiment":"nimbus-pref-qa-1-4week-rollout","feature":"nimbus-qa-1"}}
+{"timestamp":0,"category":"nimbus_events","name":"validation_failed","extra":{"experiment":"nimbus-pref-qa-2-4week-experiment","reason":"invalid-feature","feature":"nimbus-qa-2"}}
+{"timestamp":0,"category":"nimbus_events","name":"validation_failed","extra":{"feature":"nimbus-qa-2","experiment":"nimbus-pref-qa-2-4week-rollout","reason":"invalid-feature"}}
+{"timestamp":0,"category":"perf","name":"page_load","extra":{"fcp_time":"986","response_time":"7","load_type":"NORMAL","js_exec_time":"17","load_time":"989"}}
+{"timestamp":1605,"category":"perf","name":"page_load","extra":{"load_time":"733","js_exec_time":"36","response_time":"631","load_type":"NORMAL","fcp_time":"685"}}

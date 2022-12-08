@@ -1,13 +1,15 @@
+import calc as calc
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import calc.settings
 import time
 
 option = webdriver.FirefoxOptions()
 
-profile_dir = r'C:\Users\ZRHan\Desktop\temp\a2s3528m.default-release'
+profile_dir = calc.settings.BASE_DIR + r'/app01/MyData/a2s3528m.default-release'
 conf_profile = webdriver.FirefoxProfile(profile_dir)
 driver = webdriver.Firefox(conf_profile)
 driver.get("https://chat.openai.com/")

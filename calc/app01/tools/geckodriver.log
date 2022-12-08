@@ -292,3 +292,5 @@ Read port: 60538
 DevTools listening on ws://127.0.0.1:60389/devtools/browser/0526b8e8-7501-4cdd-a16b-ca1e7df296d7
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileP3ay8M\thumbnails) because it does not exist
+JavaScript error: resource://gre/modules/PromiseWorker.jsm, line 106: Error: Could not get children of file(C:\Users\ZRHan\AppData\Local\Temp\rust_mozprofileP3ay8M\thumbnails) because it does not exist
