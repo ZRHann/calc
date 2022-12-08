@@ -39,3 +39,5 @@ Read port: 49159
 1670498637755	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
 DevTools listening on ws://127.0.0.1:65519/devtools/browser/3cbd131e-94a7-49bb-b5f1-a39fb3339fbb
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://chat.openai.com."
+1670498647560	Marionette	INFO	Stopped listening on port 49159

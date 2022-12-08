@@ -9,7 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 option = webdriver.FirefoxOptions()
-
+option.add_argument('--headless')
+option.add_argument('--disable-gpu')
 profile_dir = r'./app01/MyData/a2s3528m.default-release'
 conf_profile = webdriver.FirefoxProfile(profile_dir)
 driver = webdriver.Firefox(conf_profile)
