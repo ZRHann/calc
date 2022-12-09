@@ -45,9 +45,9 @@ class Server:
         # {username1: websocket1, username2: websocket2 .....}
         asyncio.run(self.create_server())
 
-    def msgSender(self, msg):
+    async def msgSender(self, msg):
         for k, v in self.USERS.items():
-            v.send(msg)
+            await v.send(msg)
 
     async def handler(self, websocket):
         async for message in websocket:
@@ -63,7 +63,7 @@ class Server:
                     "username": data["username"],
                     "content": '',
                 }
-                self.msgSender(json.dumps(msg))
+                await self.msgSender(json.dumps(msg))
             elif data["type"] == "logout":
                 msg = {
                     "type": "logout",
@@ -72,14 +72,14 @@ class Server:
                 }
                 self.USERS.pop(data["username"])
                 # print(self.USERS)
-                self.msgSender(json.dumps(msg))
+                await self.msgSender(json.dumps(msg))
             elif data["type"] == "send":
                 msg = {
                     "type": "send",
                     "username": data["username"],
                     "content": data["content"],
                 }
-                self.msgSender(json.dumps(msg))
+                await self.msgSender(json.dumps(msg))
                 if not MainClass.mychatbot.isThinking:
                     MainClass.mychatbot.isThinking = True
                     threading.Thread(target=MainClass.mychatbot.ask, args=(data["content"], self)).start()
@@ -94,7 +94,7 @@ class Server:
                         "username": "",
                         "content": ""
                     }
-                self.msgSender(json.dumps(msg2))
+                await self.msgSender(json.dumps(msg2))
 
     async def create_server(self):
         async with websockets.serve(self.handler, "172.31.0.132", 1208):
