@@ -19,7 +19,11 @@ class MyChatBot:
         print("connected")
 
     def ask(self, question):
-        response = self.chatbot.get_chat_response("Hello world", output="text")
+        print("Asked ChatGPT: ")
+        print(question)
+        response = self.chatbot.get_chat_response(question, output="text")
+        print("ChatGPT answered: ")
+        print(response)
         return response['message']
 
 
