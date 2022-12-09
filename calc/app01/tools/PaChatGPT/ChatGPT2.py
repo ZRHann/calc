@@ -80,7 +80,6 @@ class Server:
                 if not mychatbot.isThinking:
                     mychatbot.isThinking = True
                     threading.Thread(target=mychatbot.ask, args=(data["content"], )).start()
-                    ans = mychatbot.ask(data["content"])
                     msg2 = {
                         "type": "BotReceived",
                         "username": data["username"],
@@ -101,7 +100,9 @@ class Server:
 
 
 if __name__ == "__main__":
+    global mychatbot
     mychatbot = MyChatBot()
+    global server
     server = Server()
 
 
