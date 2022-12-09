@@ -47,7 +47,7 @@ class Server:
 
     def msgSender(self, msg):
         for k, v in self.USERS.items():
-            await v.send(msg)
+            v.send(msg)
 
     async def handler(self, websocket):
         async for message in websocket:
