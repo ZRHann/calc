@@ -5,10 +5,11 @@ import websockets
 import json
 import threading
 import re
+global mychatbot
+global server
 
 
 class MyChatBot:
-
     def __init__(self):
         config = {
             # "email": "<YOUR_EMAIL>",
@@ -22,7 +23,6 @@ class MyChatBot:
         print("connected")
 
     def ask(self, question):
-        global server
         print("Asked ChatGPT: ")
         print(question)
         response = self.chatbot.get_chat_response(question, output="text")
@@ -101,9 +101,7 @@ class Server:
 
 
 if __name__ == "__main__":
-    global mychatbot
     mychatbot = MyChatBot()
-    global server
     server = Server()
 
 
