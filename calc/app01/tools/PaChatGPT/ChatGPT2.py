@@ -89,7 +89,7 @@ class Server:
                 await self.msgSender(json.dumps(msg))
                 if not MainClass.mychatbot.isThinking:
                     MainClass.mychatbot.isThinking = True
-                    await MainClass.mychatbot.ask(data["content"], self)
+                    MainClass.mychatbot.question = data["content"]
                     msg2 = {
                         "type": "BotReceived",
                         "username": data["username"],
