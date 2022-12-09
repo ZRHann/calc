@@ -82,7 +82,7 @@ class Server:
                 await self.msgSender(json.dumps(msg))
                 if not MainClass.mychatbot.isThinking:
                     MainClass.mychatbot.isThinking = True
-                    threading.Thread(target=MainClass.mychatbot.ask, args=(data["content"], self)).start()
+                    threading.Thread(target=await MainClass.mychatbot.ask, args=(data["content"], self)).start()
                     msg2 = {
                         "type": "BotReceived",
                         "username": data["username"],
