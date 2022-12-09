@@ -97,7 +97,14 @@
                     } else if (data['type'] === "logout") {
                         addStr = "<p><span style='color: red'>系统消息</span>：" + "<span style='color: blue'>" + username + "</span>" + '离开了聊天室' + "</p>";
                     } else if (data["type"] === "send") {
-                        addStr = "<p><span style='color: blue;'>" + username + "</span>：" + "<span>" + content + "</span></p>"
+                        let firAddStr = "";
+                        if(username == "ChatGPT") {
+                            firAddStr = "<p><span style='color: green;'>"
+                        }
+                        else {
+                            firAddStr = "<p><span style='color: blue;'>"
+                        }
+                        addStr = firAddStr + username + "</span>：" + "<span>" + content + "</span></p>"
                     }
                     $('#MessageBox').html($('#MessageBox').html() + addStr);
                 };
