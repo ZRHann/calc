@@ -104,8 +104,9 @@ class Server:
 
 
 if __name__ == "__main__":
-    MainClass.myserver = Server()
     MainClass.mychatbot = MyChatBot()
+    MainClass.myserver = Server()
+
 
 
 
