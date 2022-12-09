@@ -25,7 +25,7 @@ class MyChatBot:
         self.chatbot = Chatbot(config, conversation_id=None)
         print("connected")
 
-    def ask(self, question):
+    def ask(self, question, server1):
         print("Asked ChatGPT: ")
         print(question)
         response = self.chatbot.get_chat_response(question, output="text")
@@ -36,7 +36,7 @@ class MyChatBot:
             "username": "ChatGPT",
             "content": response["message"],
         }
-        MainClass.myserver.msgSender(json.dumps(msg1))
+        server1.msgSender(json.dumps(msg1))
         self.isThinking = False
 
 
@@ -83,7 +83,7 @@ class Server:
                 await self.msgSender(json.dumps(msg))
                 if not MainClass.mychatbot.isThinking:
                     MainClass.mychatbot.isThinking = True
-                    threading.Thread(target=MainClass.mychatbot.ask, args=(data["content"], )).start()
+                    threading.Thread(target=MainClass.mychatbot.ask, args=(data["content"], MainClass.myserver)).start()
                     msg2 = {
                         "type": "BotReceived",
                         "username": data["username"],
