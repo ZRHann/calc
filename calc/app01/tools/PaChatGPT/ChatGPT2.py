@@ -9,7 +9,7 @@ import re
 
 class MainClass:
     mychatbot = None
-    server = None
+    myserver = None
 
 
 class MyChatBot:
@@ -36,7 +36,7 @@ class MyChatBot:
             "username": "ChatGPT",
             "content": response["message"],
         }
-        MainClass.server.msgSender(json.dumps(msg1))
+        MainClass.myserver.msgSender(json.dumps(msg1))
         self.isThinking = False
 
 
@@ -104,8 +104,9 @@ class Server:
 
 
 if __name__ == "__main__":
+    MainClass.myserver = Server()
     MainClass.mychatbot = MyChatBot()
-    MainClass.server = Server()
+
 
 
 
