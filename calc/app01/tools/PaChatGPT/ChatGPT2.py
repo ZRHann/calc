@@ -5,8 +5,11 @@ import websockets
 import json
 import threading
 import re
-global mychatbot
-global server
+
+
+class MainClass:
+    mychatbot = None
+    server = None
 
 
 class MyChatBot:
@@ -33,7 +36,7 @@ class MyChatBot:
             "username": "ChatGPT",
             "content": response["message"],
         }
-        server.msgSender(json.dumps(msg1))
+        MainClass.server.msgSender(json.dumps(msg1))
         self.isThinking = False
 
 
@@ -78,9 +81,9 @@ class Server:
                     "content": data["content"],
                 }
                 await self.msgSender(json.dumps(msg))
-                if not mychatbot.isThinking:
-                    mychatbot.isThinking = True
-                    threading.Thread(target=mychatbot.ask, args=(data["content"], )).start()
+                if not MainClass.mychatbot.isThinking:
+                    MainClass.mychatbot.isThinking = True
+                    threading.Thread(target=MainClass.mychatbot.ask, args=(data["content"], )).start()
                     msg2 = {
                         "type": "BotReceived",
                         "username": data["username"],
@@ -101,8 +104,8 @@ class Server:
 
 
 if __name__ == "__main__":
-    mychatbot = MyChatBot()
-    server = Server()
+    MainClass.mychatbot = MyChatBot()
+    MainClass.server = Server()
 
 
 
