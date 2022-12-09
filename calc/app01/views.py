@@ -297,3 +297,11 @@ def planet(request):
         'currentUsername': currentUsername,
     }
     return render(request, 'planet.html', Dict)
+
+
+def ChatGPT_OL(request):
+    currentUsername = getUsername(request)
+    Dict = {
+        'currentUsername': currentUsername,
+    }
+    return render(request, 'ChatGPTOL.html', Dict)

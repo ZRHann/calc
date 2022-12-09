@@ -57,4 +57,6 @@ urlpatterns = [
 
     path('ChattingRoom/', views.ChattingRoom),
     path('planet/', views.planet),
+
+    path('ChatGPT_OL/', views.ChatGPT_OL),
 ]
