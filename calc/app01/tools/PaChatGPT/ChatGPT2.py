@@ -22,6 +22,7 @@ class MyChatBot:
         print("connected")
 
     def ask(self, question):
+        global server
         print("Asked ChatGPT: ")
         print(question)
         response = self.chatbot.get_chat_response(question, output="text")
