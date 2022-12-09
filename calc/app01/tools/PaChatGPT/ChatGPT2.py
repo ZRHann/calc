@@ -11,6 +11,8 @@ class MainClass:
     mychatbot = None
 
 
+
+
 class MyChatBot:
     def __init__(self):
         config = {
@@ -27,6 +29,7 @@ class MyChatBot:
 
     async def ask(self, server1):
         while True:
+            await asyncio.sleep(0.3)
             if self.isThinking:
                 print("Asked ChatGPT: ")
                 print(self.question)
@@ -42,11 +45,12 @@ class MyChatBot:
                 self.isThinking = False
 
 
+
 class Server:
     def __init__(self):
         self.USERS = {}
         # {username1: websocket1, username2: websocket2 .....}
-        asyncio.run(self.start_server_and_ask())
+        asyncio.run(self.create_server_and_ask())
 
     async def msgSender(self, msg):
         for k, v in self.USERS.items():
@@ -100,15 +104,15 @@ class Server:
                 await self.msgSender(json.dumps(msg2))
 
     async def create_server(self):
-        async with websockets.serve(self.handler, "172.31.0.132", 1208):
+        serverip = "172.31.0.132"
+        async with websockets.serve(self.handler, "localhost", 1208):
             print("Server Booted")
             await asyncio.Future()  # run forever
 
-    async def start_server_and_ask(self):
+    async def create_server_and_ask(self):
         task1 = asyncio.create_task(self.create_server())
         task2 = asyncio.create_task(MainClass.mychatbot.ask(self))
         await task1
-        await task2
 
 
 if __name__ == "__main__":
