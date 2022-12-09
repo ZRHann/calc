@@ -1,4 +1,4 @@
-from revChatGPT.revChatGPT import Chatbot
+from asyncChatGPT.asyncChatGPT import Chatbot
 import asyncio
 import time
 import websockets
@@ -27,7 +27,7 @@ class MyChatBot:
     async def ask(self, question, server1):
         print("Asked ChatGPT: ")
         print(question)
-        response = self.chatbot.get_chat_response(question, output="text")
+        response = await self.chatbot.get_chat_response(question, output="text")
         print("ChatGPT answered: ")
         print(response)
         msg1 = {
