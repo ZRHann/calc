@@ -9,7 +9,6 @@ import re
 
 class MainClass:
     mychatbot = None
-    myserver = None
 
 
 class MyChatBot:
@@ -83,7 +82,7 @@ class Server:
                 await self.msgSender(json.dumps(msg))
                 if not MainClass.mychatbot.isThinking:
                     MainClass.mychatbot.isThinking = True
-                    threading.Thread(target=MainClass.mychatbot.ask, args=(data["content"], MainClass.myserver)).start()
+                    threading.Thread(target=MainClass.mychatbot.ask, args=(data["content"], self)).start()
                     msg2 = {
                         "type": "BotReceived",
                         "username": data["username"],
@@ -105,7 +104,7 @@ class Server:
 
 if __name__ == "__main__":
     MainClass.mychatbot = MyChatBot()
-    MainClass.myserver = Server()
+    Server()
 
 
 
