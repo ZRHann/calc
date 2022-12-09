@@ -3,10 +3,12 @@ import asyncio
 import time
 import websockets
 import json
+import threading
 import re
 
 
 class MyChatBot:
+
     def __init__(self):
         config = {
             # "email": "<YOUR_EMAIL>",
@@ -15,6 +17,7 @@ class MyChatBot:
             # Deprecated. Use only if you encounter captcha with email/password
             # "proxy": "<HTTP/HTTPS_PROXY>"
         }
+        self.isThinking = False
         self.chatbot = Chatbot(config, conversation_id=None)
         print("connected")
 
@@ -24,7 +27,13 @@ class MyChatBot:
         response = self.chatbot.get_chat_response(question, output="text")
         print("ChatGPT answered: ")
         print(response)
-        return response['message']
+        msg1 = {
+            "type": "send",
+            "username": "ChatGPT",
+            "content": response["message"],
+        }
+        server.msgSender(json.dumps(msg1))
+        self.isThinking = False
 
 
 class Server:
@@ -41,6 +50,9 @@ class Server:
         async for message in websocket:
             print("接收到" + str(message))
             data = json.loads(message)
+            '''
+                type: login logout send BotThinking BotReceived 
+            '''
             if data["type"] == "login":
                 self.USERS[data["username"]] = websocket
                 msg = {
@@ -65,12 +77,21 @@ class Server:
                     "content": data["content"],
                 }
                 await self.msgSender(json.dumps(msg))
-                ans = mychatbot.ask(data["content"])
-                msg2 = {
-                    "type": "send",
-                    "username": "ChatGPT",
-                    "content": ans
-                }
+                if not mychatbot.isThinking:
+                    mychatbot.isThinking = True
+                    threading.Thread(target=mychatbot.ask, args=(data["content"], )).start()
+                    ans = mychatbot.ask(data["content"])
+                    msg2 = {
+                        "type": "BotReceived",
+                        "username": data["username"],
+                        "content": ""
+                    }
+                else:
+                    msg2 = {
+                        "type": "BotThinking",
+                        "username": "",
+                        "content": ""
+                    }
                 await self.msgSender(json.dumps(msg2))
 
     async def create_server(self):
