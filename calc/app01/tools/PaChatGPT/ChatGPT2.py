@@ -22,28 +22,31 @@ class MyChatBot:
         }
         self.isThinking = False
         self.chatbot = Chatbot(config, conversation_id=None)
+        self.question = ""
         print("connected")
 
-    async def ask(self, question, server1):
-        print("Asked ChatGPT: ")
-        print(question)
-        response = await self.chatbot.get_chat_response(question, output="text")
-        print("ChatGPT answered: ")
-        print(response)
-        msg1 = {
-            "type": "send",
-            "username": "ChatGPT",
-            "content": response["message"],
-        }
-        await server1.msgSender(json.dumps(msg1))
-        self.isThinking = False
+    async def ask(self, server1):
+        while True:
+            if self.isThinking:
+                print("Asked ChatGPT: ")
+                print(self.question)
+                response = await self.chatbot.get_chat_response(self.question, output="text")
+                print("ChatGPT answered: ")
+                print(response)
+                msg1 = {
+                    "type": "send",
+                    "username": "ChatGPT",
+                    "content": response["message"],
+                }
+                await server1.msgSender(json.dumps(msg1))
+                self.isThinking = False
 
 
 class Server:
     def __init__(self):
         self.USERS = {}
         # {username1: websocket1, username2: websocket2 .....}
-        asyncio.run(self.create_server())
+        asyncio.run(self.start_server_and_ask())
 
     async def msgSender(self, msg):
         for k, v in self.USERS.items():
@@ -100,6 +103,12 @@ class Server:
         async with websockets.serve(self.handler, "172.31.0.132", 1208):
             print("Server Booted")
             await asyncio.Future()  # run forever
+
+    async def start_server_and_ask(self):
+        task1 = asyncio.create_task(self.create_server())
+        task2 = asyncio.create_task(MainClass.mychatbot.ask(self))
+        await task1
+        await task2
 
 
 if __name__ == "__main__":
