@@ -81,6 +81,7 @@
                     }
                     socket.send(JSON.stringify(msg));
                     $('#SendBTN').attr("disabled", false);
+                    $('#MessageBox').text("");
                 };
 
 
@@ -106,7 +107,7 @@
                     } else if (data["type"] === "BotReceived") {
                         addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>收到了<span style='color: blue'>"+ data["username"] +"</span>的问题，正在努力思考中...</p>"
                     } else if(data["type"] === "notice") {
-                        addStr = "<p><span style='color: red'>系统消息</span>：-----以上为历史消息-----</p>"
+                        addStr = "<p><span style='color: red'>系统消息</span>："+ data["content"] +"</p>"
                     }
                     $('#MessageBox').html($('#MessageBox').html() + addStr);
                 };
