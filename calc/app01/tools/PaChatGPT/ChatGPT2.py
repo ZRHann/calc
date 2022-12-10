@@ -105,17 +105,24 @@ class Server:
             '''
             if data["type"] == "login":  # 私发给他历史消息，然后广播他上线的消息。
                 self.USERS[data["username"]] = websocket
-                msg = {
-                    "type": "login",
-                    "username": data["username"],
-                    "content": '',
-                }
+
                 # 私发
                 history_jsons = MainClass.sql.get_msg_json()
                 for history_json in history_jsons:
                     # print("history_json: ", history_json)
                     await websocket.send(history_json[0])
+                msg = {
+                    "type": "notice",
+                    "username": data["username"],
+                    "content": '以上为历史消息',
+                }
+                await websocket.send(json.dumps(msg))
                 # 广播
+                msg = {
+                    "type": "login",
+                    "username": data["username"],
+                    "content": '',
+                }
                 await self.msgSender(json.dumps(msg))
             elif data["type"] == "logout":
                 msg = {

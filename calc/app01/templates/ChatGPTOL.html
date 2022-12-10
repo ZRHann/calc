@@ -105,6 +105,8 @@
                         addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>还在努力思考中，请耐心等待...</p>"
                     } else if (data["type"] === "BotReceived") {
                         addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>收到了<span style='color: blue'>"+ data["username"] +"</span>的问题，正在努力思考中...</p>"
+                    } else if(data["type"] === "notice") {
+                        addStr = "<p><span style='color: red'>系统消息</span>：-----以上为历史消息-----</p>"
                     }
                     $('#MessageBox').html($('#MessageBox').html() + addStr);
                 };
