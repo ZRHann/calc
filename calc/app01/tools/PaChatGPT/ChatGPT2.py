@@ -22,7 +22,7 @@ class SQL:
         self.cursor = self.db.cursor()
 
     def add_msg_json(self, msg_json):
-        sql = """INSERT INTO ChatGPT_OL(msg_json)
+        sql = """INSERT INTO conversation_log(msg_json)
                  VALUES ({})""".format(msg_json)
         try:
             # 执行sql语句
