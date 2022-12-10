@@ -48,6 +48,7 @@
         let MessageBox = document.querySelector("#MessageBox");
         let SendMessageArea = document.querySelector("#SendMessageArea");
         let currentUsername = '{{ currentUsername }}';
+        let is_history_message_over = false;
         let socket;
 
 
@@ -71,7 +72,7 @@
                     return;
                 }
                 socket = new WebSocket("ws://117.68.108.158:1208");
-
+                is_history_message_over = false;
                 socket.onopen = function (e) {
                     {#alert("[open] Connection established. Sending to server the LOGIN message");#}
                     msg = {
@@ -90,6 +91,7 @@
                     let username = data['username'];
                     let content = data['content'];
                     let addStr = '';
+
                     if (data['type'] === "login") {
                         addStr = "<p><span style='color: red'>系统消息</span>：" + "<span style='color: blue'>" + username + "</span>" + '加入了聊天室' + "</p>";
                     } else if (data['type'] === "logout") {
@@ -107,9 +109,18 @@
                     } else if (data["type"] === "BotReceived") {
                         addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>收到了<span style='color: blue'>"+ data["username"] +"</span>的问题，正在努力思考中...</p>"
                     } else if(data["type"] === "notice") {
-                        addStr = "<p><span style='color: red'>系统消息</span>："+ data["content"] +"</p>"
+                        addStr = "<p><span style='color: red'>系统消息</span>："+ data["content"] +"</p>";
+                        if(data["content"] === "------以上为历史消息------") {
+                            is_history_message_over = true;
+                        }
                     }
                     $('#MessageBox').html($('#MessageBox').html() + addStr);
+
+
+                    if(is_history_message_over) {
+                        let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
+                        $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                    }
                 };
                 socket.onclose = function (event) {
                     if (event.wasClean) {
@@ -144,6 +155,26 @@
             height: 550px;
             overflow: auto;
         }
+        #MessageBox ::-webkit-scrollbar{
+            width:10px;
+            height:10px;
+            /**/
+        }
+        #MessageBox ::-webkit-scrollbar-track{
+            background: rgb(239, 239, 239);
+            border-radius:2px;
+        }
+        #MessageBox ::-webkit-scrollbar-thumb{
+            background: #bfbfbf;
+            border-radius:10px;
+        }
+        #MessageBox ::-webkit-scrollbar-thumb:hover{
+            background: #333;
+        }
+        #MessageBox ::-webkit-scrollbar-corner{
+            background: #179a16;
+        }
+
     </style>
 {% endblock %}
 
