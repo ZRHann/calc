@@ -63,9 +63,12 @@ class MyChatBot:
         with open("session_token.txt", "r") as f:
             config["session_token"] = f.read()
         self.isThinking = False
-        self.chatbot = Chatbot(config, conversation_id=None)
+        try:
+            self.chatbot = Chatbot(config, conversation_id=None)
+            print("connected")
+        except Exception as ex:
+            print(ex)
         self.question = ""
-        print("connected")
 
     async def ask(self, server1):
         while True:
