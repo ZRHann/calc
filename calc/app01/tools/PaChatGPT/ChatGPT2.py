@@ -30,10 +30,11 @@ class SQL:
             # 提交到数据库执行
             self.db.commit()
             print("Successfully Added a msg_json to database")
-        except:
+        except Exception as ex:
             # 如果发生错误则回滚
             self.db.rollback()
-            print("Failed to Add a msg_json to database")
+            print("Failed to Add a msg_json to database: ")
+            print(ex)  # 打印异常信息
 
     def get_msg_json(self):
         sql = "SELECT * FROM conversation_log"
@@ -45,8 +46,9 @@ class SQL:
             results = self.cursor.fetchall()
             print("Successfully get_msg_json")
             return results
-        except:
-            print("get_msg_json Error: unable to fetch data")
+        except Exception as ex:
+            print("get_msg_json Error: unable to fetch data: ")
+            print(ex)  # 打印异常信息
             return []
 
 
