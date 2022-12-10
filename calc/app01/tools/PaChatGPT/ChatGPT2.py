@@ -113,7 +113,7 @@ class Server:
                 # 私发
                 history_jsons = MainClass.sql.get_msg_json()
                 for history_json in history_jsons:
-                    websocket.send(history_json["msg_json"])
+                    websocket.send(json.dumps(history_json["msg_json"]))
                 # 广播
                 await self.msgSender(json.dumps(msg))
             elif data["type"] == "logout":
