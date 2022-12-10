@@ -107,17 +107,17 @@
                     } else if (data["type"] === "BotThinking") {
                         addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>还在努力思考中，请耐心等待...</p>"
                     } else if (data["type"] === "BotReceived") {
-                        addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>收到了<span style='color: blue'>"+ data["username"] +"</span>的问题，正在努力思考中...</p>"
-                    } else if(data["type"] === "notice") {
-                        addStr = "<p><span style='color: red'>系统消息</span>："+ data["content"] +"</p>";
-                        if(data["content"] === "------以上为历史消息------") {
+                        addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>收到了<span style='color: blue'>" + data["username"] + "</span>的问题，正在努力思考中...</p>"
+                    } else if (data["type"] === "notice") {
+                        addStr = "<p><span style='color: red'>系统消息</span>：" + data["content"] + "</p>";
+                        if (data["content"] === "------以上为历史消息------") {
                             is_history_message_over = true;
                         }
                     }
                     $('#MessageBox').html($('#MessageBox').html() + addStr);
 
 
-                    if(is_history_message_over) {
+                    if (is_history_message_over) {
                         let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
                         $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
                     }
@@ -136,7 +136,8 @@
                 };
             }
         )
-        window.onbeforeunload = function () {
+
+        function logout() {
             msg = {
                 "type": "logout",
                 "username": '{{ currentUsername }}',
@@ -144,7 +145,24 @@
             }
             socket.send(JSON.stringify(msg));
             socket.close();
+            window.location.reload();
         }
+
+        window.addEventListener("beforeunload", function () {
+            logout();
+        });
+        window.addEventListener("pagehide", function () { // IOS
+            logout();
+        });
+        window.addEventListener("unload", function () {
+            logout();
+        });
+        document.addEventListener('visibilitychange', (e) => {
+            if (document.visibilityState === 'hidden') {
+                logout();
+            }
+        }, false)
+
     </script>
     <style>
         #MessageBox {
@@ -155,23 +173,28 @@
             height: 550px;
             overflow: auto;
         }
-        #MessageBox::-webkit-scrollbar{
-            width:10px;
-            height:10px;
+
+        #MessageBox::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
             /**/
         }
-        #MessageBox::-webkit-scrollbar-track{
+
+        #MessageBox::-webkit-scrollbar-track {
             background: rgb(239, 239, 239);
-            border-radius:2px;
+            border-radius: 2px;
         }
-        #MessageBox::-webkit-scrollbar-thumb{
+
+        #MessageBox::-webkit-scrollbar-thumb {
             background: #bfbfbf;
-            border-radius:10px;
+            border-radius: 10px;
         }
-        #MessageBox::-webkit-scrollbar-thumb:hover{
+
+        #MessageBox::-webkit-scrollbar-thumb:hover {
             background: #333;
         }
-        #MessageBox::-webkit-scrollbar-corner{
+
+        #MessageBox::-webkit-scrollbar-corner {
             background: #179a16;
         }
 

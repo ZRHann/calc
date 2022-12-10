@@ -94,7 +94,10 @@ class Server:
     async def msgSender(self, msg):
         MainClass.sql.add_msg_json(msg)
         for k, v in self.USERS.items():
-            await v.send(msg)
+            try:
+                await v.send(msg)
+            except Exception as ex:
+                print(ex)
 
     async def handler(self, websocket):
         async for message in websocket:
