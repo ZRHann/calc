@@ -114,7 +114,7 @@ class Server:
                 msg = {
                     "type": "notice",
                     "username": data["username"],
-                    "content": '以上为历史消息',
+                    "content": '------以上为历史消息------',
                 }
                 await websocket.send(json.dumps(msg))
                 # 广播
