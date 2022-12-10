@@ -4,6 +4,5 @@ db = pymysql.connect(host='localhost',
                                   password='zg801zrh160118.',
                                   database='ChatGPT_OL')
 cursor = db.cursor()
-sql = """INSERT INTO conversation_log(msg_json)
-                 VALUES (1)"""
+sql = """INSERT INTO conversation_log(msg_json) VALUES ()"""
 cursor.execute(sql)
