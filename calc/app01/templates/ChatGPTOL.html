@@ -157,11 +157,7 @@
         window.addEventListener("unload", function () {
             logout();
         });
-        document.addEventListener('visibilitychange', (e) => {
-            if (document.visibilityState === 'hidden') {
-                logout();
-            }
-        }, false)
+
 
     </script>
     <style>
