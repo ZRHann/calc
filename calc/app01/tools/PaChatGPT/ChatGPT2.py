@@ -5,12 +5,49 @@ import websockets
 import json
 import threading
 import re
+import pymysql
 
 
 class MainClass:
     mychatbot = None
+    sql = None
 
 
+class SQL:
+    def __init__(self):
+        self.db = pymysql.connect(host='localhost',
+                                  user='root',
+                                  password='zg801zrh160118.',
+                                  database='ChatGPT_OL')
+        self.cursor = self.db.cursor()
+
+    def add_msg_json(self, msg_json):
+        sql = """INSERT INTO ChatGBT_OL(msg_json)
+                 VALUES ({})""".format(msg_json)
+        try:
+            # 执行sql语句
+            self.cursor.execute(sql)
+            # 提交到数据库执行
+            self.db.commit()
+            print("Successfully Added a msg_json to database")
+        except:
+            # 如果发生错误则回滚
+            self.db.rollback()
+            print("Failed to Add a msg_json to database")
+
+    def get_msg_json(self):
+        sql = "SELECT * FROM ChatGPT_OL"
+
+        try:
+            # 执行SQL语句
+            self.cursor.execute(sql)
+            # 获取所有记录列表
+            results = self.cursor.fetchall()
+            print("Successfully get_msg_json")
+            return results
+        except:
+            print("get_msg_json Error: unable to fetch data")
+            return []
 
 
 class MyChatBot:
@@ -45,7 +82,6 @@ class MyChatBot:
                 self.isThinking = False
 
 
-
 class Server:
     def __init__(self):
         self.USERS = {}
@@ -53,6 +89,7 @@ class Server:
         asyncio.run(self.create_server_and_ask())
 
     async def msgSender(self, msg):
+        MainClass.sql.add_msg_json(msg)
         for k, v in self.USERS.items():
             await v.send(msg)
 
@@ -63,13 +100,18 @@ class Server:
             '''
                 type: login logout send BotThinking BotReceived 
             '''
-            if data["type"] == "login":
+            if data["type"] == "login":  # 私发给他历史消息，然后广播他上线的消息。
                 self.USERS[data["username"]] = websocket
                 msg = {
                     "type": "login",
                     "username": data["username"],
                     "content": '',
                 }
+                # 私发
+                history_jsons = MainClass.sql.get_msg_json()
+                for history_json in history_jsons:
+                    websocket.send(history_json["msg_json"])
+                # 广播
                 await self.msgSender(json.dumps(msg))
             elif data["type"] == "logout":
                 msg = {
@@ -116,6 +158,6 @@ class Server:
 
 
 if __name__ == "__main__":
+    MainClass.sql = SQL()
     MainClass.mychatbot = MyChatBot()
     Server()
-
