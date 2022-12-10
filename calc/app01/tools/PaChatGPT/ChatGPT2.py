@@ -22,7 +22,7 @@ class SQL:
         self.cursor = self.db.cursor()
 
     def add_msg_json(self, msg_json):
-        sql = """INSERT INTO ChatGBT_OL(msg_json)
+        sql = """INSERT INTO ChatGPT_OL(msg_json)
                  VALUES ({})""".format(msg_json)
         try:
             # 执行sql语句
@@ -36,7 +36,7 @@ class SQL:
             print("Failed to Add a msg_json to database")
 
     def get_msg_json(self):
-        sql = "SELECT * FROM ChatGPT_OL"
+        sql = "SELECT * FROM conversation_log"
 
         try:
             # 执行SQL语句
