@@ -8,27 +8,57 @@
 {% block content %}
 
     <div class="container">
-        <div class="row mt-4">
-            <div class="col-lg-8">
-                <label>实时消息</label>
-                <div id="MessageBox"
-                     class="px-3 py-1"
-                ></div>
-            </div>
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">发送消息</label>
-                    <textarea class="form-control"
-                              id="SendMessageArea"
-                              style="height: 495px; resize: none;"
-                              contenteditable="true"
-                    ></textarea>
-                </div>
-                <button class="btn btn-dark" id="SendBTN" disabled>发送</button>
-                <button class="btn btn-dark ml-2" id="ConnectBTN">连接</button>
+        <div class="row pt-2 pr-0" style="height: 550px;">
+            <div class="col-lg-12 px-0" id="tableDiv">
+                <table class="table table-striped px-0" style="width: 100%;">
+                    <tbody class="px-0" id="MessageBox" style="width: 100%;">
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div class="row pt-2 px-0" style="height: 100px">
+            <div class="col-lg-11 px-0">
+                <div class="form-group">
+                        <textarea class="form-control"
+                                  id="SendMessageArea"
+                                  style="height: 90px; resize: none; width: 100%"
+                                  contenteditable="true"
+                        ></textarea>
+                </div>
+            </div>
+            <div class="col-lg-1 pl-2 pr-0">
+                <button class="btn btn-dark" id="ConnectBTN" style="width: 100%">连接</button>
+                <button class="btn btn-dark mt-2" id="SendBTN" style="width: 100%" disabled>发送</button>
+
+            </div>
+{#        <div class="row pt-2">#}
+
+{#        </div>#}
+
     </div>
+
+
+    {#    <div class="container">#}
+    {#        <div class="row mt-4">#}
+    {#            <div class="col-lg-8">#}
+    {#                <label>实时消息</label>#}
+    {#                <div id="MessageBox"#}
+    {#                     class="px-3 py-1"#}
+    {#                ></div>#}
+    {#            </div>#}
+    {#            <div class="col-lg-4">#}
+    {#                <div class="form-group">#}
+    {#                    <label for="exampleFormControlTextarea1">发送消息</label>#}
+    {#                    <textarea class="form-control"#}
+    {#                              id="SendMessageArea"#}
+    {#                              style="height: 495px; resize: none;"#}
+    {#                              contenteditable="true"#}
+    {#                    ></textarea>#}
+    {#                </div>#}
+
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
     <div class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="ErrorModal">
         <div class="modal-dialog modal-dialog-centered bd-example-modal-sm modal-sm" role="document">
@@ -66,7 +96,7 @@
 
         $("#ConnectBTN").click(
             function () {
-                if (currentUsername == "-1") {
+                if (currentUsername === "-1") {
                     $('#ErrorModalH5').text("请先登录");
                     $('#ErrorModal').modal();
                     return;
@@ -82,7 +112,8 @@
                     }
                     socket.send(JSON.stringify(msg));
                     $('#SendBTN').attr("disabled", false);
-                    $('#MessageBox').text("");
+                    let spaces = "-".repeat(1000)
+                    $('#MessageBox').html("<tr><td style='height: 0; line-height: 0;; font-size: 1px;'>"+ spaces +"</td></tr>");
                 };
 
 
@@ -93,27 +124,49 @@
                     let addStr = '';
 
                     if (data['type'] === "login") {
-                        addStr = "<p><span style='color: red'>系统消息</span>：" + "<span style='color: blue'>" + username + "</span>" + '加入了聊天室' + "</p>";
+                        addStr += add_row_left("tempid");
+                        addStr += add_span("red", "系统消息");
+                        addStr += "：";
+                        addStr += add_span("blue", username);
+                        addStr += "加入了聊天室";
+
                     } else if (data['type'] === "logout") {
-                        addStr = "<p><span style='color: red'>系统消息</span>：" + "<span style='color: blue'>" + username + "</span>" + '离开了聊天室' + "</p>";
+                        addStr += add_row_left("tempid");
+                        addStr += add_span("red", "系统消息");
+                        addStr += "：";
+                        addStr += add_span("blue", username);
+                        addStr += "离开了聊天室";
                     } else if (data["type"] === "send") {
-                        let firAddStr = "";
-                        if (username == "ChatGPT") {
-                            firAddStr = "<p><span style='color: green;'>"
+                        addStr += add_row_left("tempid");
+                        if (username === "ChatGPT") {
+                            addStr += add_span("green", username);
                         } else {
-                            firAddStr = "<p><span style='color: blue;'>"
+                            addStr += add_span("blue", username);
                         }
-                        addStr = firAddStr + username + "</span>：" + "<span>" + content + "</span></p>"
+                        addStr += "：" + content;
                     } else if (data["type"] === "BotThinking") {
-                        addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>还在努力思考中，请耐心等待...</p>"
+                        addStr += add_row_left("tempid");
+                        addStr += add_span("red", "系统消息");
+                        addStr += "：";
+                        addStr += add_span("green", "ChatGPT");
+                        addStr += "还在努力思考，请耐心等待...";
                     } else if (data["type"] === "BotReceived") {
-                        addStr = "<p><span style='color: red'>系统消息</span>：<span style='color: green'>ChatGPT</span>收到了<span style='color: blue'>" + data["username"] + "</span>的问题，正在努力思考中...</p>"
+                        addStr += add_row_left("tempid");
+                        addStr += add_span("red", "系统消息");
+                        addStr += "：";
+                        addStr += add_span("green", "ChatGPT");
+                        addStr += "收到了";
+                        addStr += add_span("blue", username);
+                        addStr += "的消息，正在努力思考...";
                     } else if (data["type"] === "notice") {
-                        addStr = "<p><span style='color: red'>系统消息</span>：" + data["content"] + "</p>";
+                        addStr += add_row_left("tempid");
+                        addStr += add_span("red", "系统消息");
+                        addStr += "：" + data["content"];
                         if (data["content"] === "------以上为历史消息------") {
                             is_history_message_over = true;
                         }
                     }
+                    addStr += "</td></tr>"
                     $('#MessageBox').html($('#MessageBox').html() + addStr);
 
 
@@ -148,6 +201,14 @@
             window.location.reload();
         }
 
+        function add_row_left(id) {
+            return "<tr id='" + id + "'><td>";
+        }
+
+        function add_span(color, inside_str) {
+            return "<span style='color: " + color + ";'>" + inside_str + "</span>";
+        }
+
         window.addEventListener("beforeunload", function () {
             logout();
         });
@@ -177,7 +238,7 @@
         }
 
         #MessageBox::-webkit-scrollbar-track {
-            background: rgb(239, 239, 239);
+            background: transparent;
             border-radius: 2px;
         }
 
@@ -194,6 +255,17 @@
             background: #179a16;
         }
 
+        #ConnectBTN {
+            bottom: 0px;
+        }
+
+        #MessageBox {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            position: absolute;
+            height: 100%;
+            padding: 0;
+        }
     </style>
 {% endblock %}
 
