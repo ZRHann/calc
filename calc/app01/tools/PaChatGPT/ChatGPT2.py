@@ -31,9 +31,13 @@ class SQL:
             print("Successfully Added a msg_json to database")
         except Exception as ex:
             # 如果发生错误则回滚
-            self.db.rollback()
-            print("Failed to Add a msg_json to database: ")
-            print(ex)  # 打印异常信息
+            try:
+                self.db.rollback()
+            except:
+                pass
+            finally:
+                print("Failed to Add a msg_json to database: ")
+                print(ex)  # 打印异常信息
 
     def get_msg_json(self):
         sql = "SELECT * FROM conversation_log"
@@ -101,6 +105,7 @@ class Server:
                 await v.send(msg)
             except Exception as ex:
                 print(ex)
+                self.USERS.pop(k)
 
     async def handler(self, websocket):
         async for message in websocket:
@@ -172,6 +177,7 @@ class Server:
         task1 = asyncio.create_task(self.create_server())
         task2 = asyncio.create_task(MainClass.mychatbot.ask(self))
         await task1
+        await task2
 
 
 if __name__ == "__main__":
