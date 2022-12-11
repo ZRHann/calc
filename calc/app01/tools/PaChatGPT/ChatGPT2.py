@@ -105,7 +105,6 @@ class Server:
                 await v.send(msg)
             except Exception as ex:
                 print(ex)
-                self.USERS.pop(k)
 
     async def handler(self, websocket):
         async for message in websocket:
