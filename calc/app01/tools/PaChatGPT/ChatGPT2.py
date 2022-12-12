@@ -1,3 +1,5 @@
+import traceback
+
 from revChatGPT.revChatGPT import AsyncChatbot as Chatbot
 import asyncio
 import time
@@ -39,7 +41,7 @@ class SQL:
                 pass
             finally:
                 print("Failed to Add a msg_json to database: ")
-                print(ex)  # 打印异常信息
+                traceback.print_exc()  # 打印异常信息
 
     def get_msg_json(self):
         sql = "SELECT * FROM conversation_log"
@@ -53,7 +55,7 @@ class SQL:
             return results
         except Exception as ex:
             print("get_msg_json Error: unable to fetch data: ")
-            print(ex)  # 打印异常信息
+            traceback.print_exc()  # 打印异常信息
             return []
 
 
@@ -79,7 +81,7 @@ class MyChatBot:
             self.chatbot = Chatbot(config, conversation_id=None)
             print("connected")
         except Exception as ex:
-            print(ex)
+            traceback.print_exc()
         self.question = ""
 
     async def ask(self, server1):
@@ -104,7 +106,7 @@ class MyChatBot:
                         await server1.msgSender(json.dumps(msg1))
                 except Exception as ex:
                     print("ChatGPT Failed To Answer")
-                    print(ex)
+                    traceback.print_exc()
                     msg1 = {
                         "type": "BotAnswerFailed",
                         "username": "ChatGPT",
@@ -129,7 +131,7 @@ class Server:
             try:
                 await v.send(msg)
             except Exception as ex:
-                print(ex)
+                traceback.print_exc()
 
     async def handler(self, websocket):
         async for message in websocket:
