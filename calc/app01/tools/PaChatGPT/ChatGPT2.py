@@ -80,22 +80,38 @@ class MyChatBot:
             print(ex)
         self.question = ""
 
-    async def ask(self, server1):
+    async def ask(self, server1, answer_id):
         while True:
             await asyncio.sleep(0.3)
             if self.isThinking:
                 print("Asked ChatGPT: ")
                 print(self.question)
-                response = await self.chatbot.get_chat_response(self.question, output="text")
-                print("ChatGPT answered: ")
-                print(response)
-                msg1 = {
-                    "type": "send",
-                    "username": "ChatGPT",
-                    "content": response["message"],
-                }
-                await server1.msgSender(json.dumps(msg1))
-                self.isThinking = False
+                msg1 = {}
+                try:
+                    response = await self.chatbot.get_chat_response(self.question, output="stream")
+                    async for res in response:
+                        await asyncio.sleep(0.03)
+                        print("ChatGPT answered: ", res["message"])
+                        msg1 = {
+                            "type": "BotAnswer",
+                            "username": "ChatGPT",
+                            "content": res["message"],
+                            "answer_id": answer_id,
+                        }
+                        await server1.msgSender(json.dumps(msg1))
+                except Exception as ex:
+                    print("ChatGPT Failed To Answer")
+                    print(ex)
+                    msg1 = {
+                        "type": "BotAnswerFailed",
+                        "username": "ChatGPT",
+                        "content": "",
+                        "answer_id": answer_id,
+                    }
+                    await server1.msgSender(json.dumps(msg1))
+                finally:
+                    self.isThinking = False
+
 
 
 class Server:

@@ -19,25 +19,15 @@ chatbot = Chatbot(config, conversation_id=None)
 print("connected")
 
 
-async def f1():
-    res = await chatbot.get_chat_response("who are you", output="stream")
-    async for r in res:
-        await asyncio.sleep(0.02)
-        print(r["message"])
-
-
-async def f2():
-    res = await chatbot.get_chat_response("123", output="stream")
-    async for r in res:
-        await asyncio.sleep(0.02)
-        print(r["message"])
+async def f1(msg):
+    res = await chatbot.get_chat_response(msg, output="text")
+    print(res)
 
 
 async def main():
-    task1 = asyncio.create_task(f1())
-    task2 = asyncio.create_task(f2())
-    await task1
-    await task2
+    while True:
+        msg = input()
+        await f1(msg)
 
 asyncio.run(main())
 

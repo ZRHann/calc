@@ -122,57 +122,125 @@
                     let username = data['username'];
                     let content = data['content'];
                     let addStr = '';
-
                     if (data['type'] === "login") {
-                        addStr += add_row_left("tempid");
+                        addStr += add_row_left("");
                         addStr += add_span("red", "系统消息");
                         addStr += "：";
                         addStr += add_span("blue", username);
                         addStr += "加入了聊天室";
 
+                        addStr += "</td></tr>"
+                        $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        if (is_history_message_over) {
+                            let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
+                            $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                        }
+
                     } else if (data['type'] === "logout") {
-                        addStr += add_row_left("tempid");
+                        addStr += add_row_left("");
                         addStr += add_span("red", "系统消息");
                         addStr += "：";
                         addStr += add_span("blue", username);
                         addStr += "离开了聊天室";
+
+                        addStr += "</td></tr>"
+                        $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        if (is_history_message_over) {
+                            let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
+                            $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                        }
                     } else if (data["type"] === "send") {
-                        addStr += add_row_left("tempid");
+                        addStr += add_row_left("");
                         if (username === "ChatGPT") {
                             addStr += add_span("green", username);
                         } else {
                             addStr += add_span("blue", username);
                         }
                         addStr += "：" + content;
+
+                        addStr += "</td></tr>"
+                        $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        if (is_history_message_over) {
+                            let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
+                            $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                        }
                     } else if (data["type"] === "BotThinking") {
-                        addStr += add_row_left("tempid");
+                        addStr += add_row_left("");
                         addStr += add_span("red", "系统消息");
                         addStr += "：";
                         addStr += add_span("green", "ChatGPT");
                         addStr += "还在努力思考，请耐心等待...";
+
+                        addStr += "</td></tr>"
+                        $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        if (is_history_message_over) {
+                            let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
+                            $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                        }
                     } else if (data["type"] === "BotReceived") {
-                        addStr += add_row_left("tempid");
+                        addStr += add_row_left("");
                         addStr += add_span("red", "系统消息");
                         addStr += "：";
                         addStr += add_span("green", "ChatGPT");
                         addStr += "收到了";
                         addStr += add_span("blue", username);
                         addStr += "的消息，正在努力思考...";
+
+                        addStr += "</td></tr>"
+                        $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        if (is_history_message_over) {
+                            let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
+                            $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                        }
                     } else if (data["type"] === "notice") {
-                        addStr += add_row_left("tempid");
+                        addStr += add_row_left("");
                         addStr += add_span("red", "系统消息");
                         addStr += "：" + data["content"];
                         if (data["content"] === "------以上为历史消息------") {
                             is_history_message_over = true;
                         }
-                    }
-                    addStr += "</td></tr>"
-                    $('#MessageBox').html($('#MessageBox').html() + addStr);
 
+                        addStr += "</td></tr>"
+                        $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        if (is_history_message_over) {
+                            let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
+                            $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                        }
+                    } else if (data["type"] === "BotAnswer") {
+                        if($("#"+data["answer_id"]).length <= 0) {
+                            {#需要增加一行#}
 
-                    if (is_history_message_over) {
-                        let sh = $("#MessageBox").prop("scrollHeight");  //获取滚动条高度
-                        $('#MessageBox').animate({scrollTop: sh}, 100);  //滚动到底部，加一个动画过渡
+                            addStr += add_row_left(data["answer_id"]);
+                            addStr += add_span("green", "ChatGPT");
+                            addStr += "：" + data["content"];
+
+                            addStr += "</td></tr>"
+                            $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        }
+                        else {
+                            {#不需要增加一行#}
+                            let updateStr = "";
+                            updateStr += add_span("green", "ChatGPT");
+                            updateStr += "：" + data["content"];
+                            $("#"+data["answer_id"]).html(updateStr);
+                        }
+                    } else if (data["type"] ===  "BotAnswerFailed") {
+                        if($("#"+data["answer_id"]).length <= 0) {
+                            {#需要增加一行#}
+                            addStr += add_row_left(data["answer_id"]);
+                            addStr += add_span("green", "ChatGPT");
+                            addStr += "：" + add_span("red", "获取回答失败");
+
+                            addStr += "</td></tr>"
+                            $('#MessageBox').html($('#MessageBox').html() + addStr);
+                        }
+                        else {
+                            {#不需要增加一行#}
+                            let updateStr = $("#" + data["answer_id"]).html();
+                            updateStr += "<br/>";
+                            updateStr += "：" + add_span("red", "获取回答失败");
+                            $("#"+data["answer_id"]).html(updateStr);
+                        }
                     }
                 };
                 socket.onclose = function (event) {
@@ -202,12 +270,14 @@
         }
 
         function add_row_left(id) {
-            return "<tr id='" + id + "'><td>";
+            return "<tr><td id='" + id + "'>";
         }
 
         function add_span(color, inside_str) {
             return "<span style='color: " + color + ";'>" + inside_str + "</span>";
         }
+
+
 
         window.addEventListener("beforeunload", function () {
             logout();
