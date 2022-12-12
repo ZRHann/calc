@@ -1,4 +1,4 @@
-from asyncChatGPT.asyncChatGPT import Chatbot
+from revChatGPT.revChatGPT import AsyncChatbot as Chatbot
 import asyncio
 import time
 import websockets
@@ -58,14 +58,20 @@ class SQL:
 class MyChatBot:
     def __init__(self):
         config = {
-            # "email": "<YOUR_EMAIL>",
-            # "password": "<YOUR_PASSWORD>"#,
-            "session_token": "",
+            # "email": "2829442630@qq.com",
+            # "password": "zg801zrh160118.",
             # Deprecated. Use only if you encounter captcha with email/password
             # "proxy": "<HTTP/HTTPS_PROXY>"
+            "session_token": "",
+            "cf_clearance": "",
+            "user_agent": "",
         }
         with open("session_token.txt", "r") as f:
             config["session_token"] = f.read()
+        with open("cf_clearance.txt", "r") as f:
+            config["cf_clearance"] = f.read()
+        with open("user_agent.txt", "r") as f:
+            config["user_agent"] = f.read()
         self.isThinking = False
         try:
             self.chatbot = Chatbot(config, conversation_id=None)
