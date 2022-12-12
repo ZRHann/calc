@@ -6,6 +6,8 @@ import json
 import threading
 import re
 import pymysql
+import random
+import string
 
 
 class MainClass:
@@ -80,13 +82,14 @@ class MyChatBot:
             print(ex)
         self.question = ""
 
-    async def ask(self, server1, answer_id):
+    async def ask(self, server1):
         while True:
             await asyncio.sleep(0.3)
             if self.isThinking:
                 print("Asked ChatGPT: ")
                 print(self.question)
                 msg1 = {}
+                answer_id = ''.join(random.sample(string.ascii_letters + string.digits, 32))
                 try:
                     response = await self.chatbot.get_chat_response(self.question, output="stream")
                     async for res in response:
