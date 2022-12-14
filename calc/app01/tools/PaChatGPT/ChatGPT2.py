@@ -1,5 +1,4 @@
 import traceback
-
 from revChatGPT.revChatGPT import AsyncChatbot as Chatbot
 import asyncio
 import time
@@ -69,6 +68,7 @@ class MyChatBot:
             "session_token": "",
             "cf_clearance": "",
             "user_agent": "",
+
         }
         with open("session_token.txt", "r") as f:
             config["session_token"] = f.read()
@@ -210,3 +210,4 @@ if __name__ == "__main__":
     MainClass.sql = SQL()
     MainClass.mychatbot = MyChatBot()
     Server()
+

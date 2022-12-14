@@ -6,22 +6,22 @@ config = {
             # Deprecated. Use only if you encounter captcha with email/password
             # "proxy": "<HTTP/HTTPS_PROXY>"
             "session_token": "",
-            "cf_clearance": "",
-            "user_agent": "",
+            # "cf_clearance": "",
+            # "user_agent": "",
         }
+
 with open("session_token.txt", "r") as f:
     config["session_token"] = f.read()
-with open("cf_clearance.txt", "r") as f:
-    config["cf_clearance"] = f.read()
-with open("user_agent.txt", "r") as f:
-    config["user_agent"] = f.read()
-chatbot = Chatbot(config, conversation_id=None)
+
+print(config)
+chatbot = Chatbot(config)
 print("connected")
 
 
 async def f1(msg):
-    res = await chatbot.get_chat_response(msg, output="text")
-    print(res)
+    res = await chatbot.get_chat_response(msg, output="stream")
+    async for r in res:
+        print(r["message"])
 
 
 async def main():
